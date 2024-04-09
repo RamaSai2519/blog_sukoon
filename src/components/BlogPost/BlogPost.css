@@ -1,0 +1,111 @@
+/* src/components/BlogPost/BlogPost.css */
+
+.blog-post-container {
+  padding: 20px;
+  display: flex;
+  flex-wrap: wrap;
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 950px;
+}
+
+.back-link {
+  text-decoration: none;
+  color: #000;
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  z-index: 2;
+}
+
+.back-icon {
+  font-size: 24px;
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+  border-radius: 25px;
+  padding: 5px;
+  color: #fff;
+  background-color: rgba(0, 0, 0, 0.5);
+  transition: background-color 1s ease;
+}
+
+.back-icon:hover {
+  background-color: rgba(0, 0, 0, 0.1);
+}
+
+.loading img {
+  width: auto;
+  height: 1920px;
+}
+
+.blog-post-section {
+  position: relative;
+  flex: 0 0 100%;
+  height: 65vh;
+  background-size: cover;
+  background-position: top;
+  background-repeat: no-repeat;
+  color: #fff;
+  border-radius: 25px;
+  overflow: hidden;
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.social-icons {
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+  z-index: 2;
+}
+
+.social-icon {
+  margin-right: 10px;
+  font-size: 20px;
+  color: #fff;
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+  border-radius: 5px;
+  padding: 5px;
+  background-color: rgba(0, 0, 0, 0.5);
+  transition: background-color 1s ease;
+}
+
+.social-icon:hover {
+  background-color: transparent;
+}
+
+.text-container {
+  flex: 1;
+  padding: 20px;
+}
+
+.blog-title {
+  font-size: 39px;
+  margin-bottom: 10px;
+}
+
+.blog-description {
+  margin-bottom: 20px;
+  font-size: 25px;
+  text-align: justify;
+}
+
+.blog-content {
+  font-size: 20px;
+}
+
+.blog-description img {
+  height: auto;
+  max-width: 800px;
+  display: block;
+  margin: 0 auto;
+  border-radius: 25px;
+}
+
+@media (max-width: 576px) {
+  .blog-title {
+    font-size: 25px;
+  }
+
+  .blog-description {
+    font-size: 20px;
+  }
+}

@@ -1,6 +1,16 @@
-.App {
-  text-align: center;
+/* App.cs */
+
+@font-face {
+  font-family: 'Custom Font';
+  src: url('./components/assets/futura light bt.ttf') format('truetype');
 }
+
+.App {
+  text-align: left;
+  font-family: 'Custom font';
+  background-color: #faf0e5;
+}
+
 
 .App-logo {
   height: 40vmin;
@@ -14,8 +24,6 @@
 }
 
 .App-header {
-  background-color: #282c34;
-  min-height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -26,13 +34,4 @@
 
 .App-link {
   color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
 }

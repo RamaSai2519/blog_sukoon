@@ -1,0 +1,60 @@
+/* src/components/RecentBlogPosts/RecentBlogPosts.css */
+
+.blog-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  grid-gap: 3rem;
+  margin-bottom: 100px;
+  background-image: none;
+}
+
+.recent-blog-posts {
+  padding: 20px;
+}
+
+.blog-post-link {
+  text-decoration: none;
+  color: black;
+}
+
+@media (min-width: 768px) {
+  .blog-grid {
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  }
+}
+
+@media (min-width: 1024px) {
+  .blog-grid {
+    grid-template-columns: repeat(3, 1fr); /* Change max columns to 3 */
+  }
+}
+
+.blog-post {
+  transition: transform 0.3s ease;
+}
+
+.blog-post:hover {
+  transform: scale(1.05); /* Scale up on hover */
+}
+
+.blog-post img {
+  width: 100%;
+  height: auto;
+  border-radius: 25px;
+  box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2);
+}
+
+.recent-blog-posts h2 {
+  font-size: 40px;
+}
+
+.blog-post h3 {
+  margin-top: 1rem;
+  margin-bottom: 0.5rem;
+  font-size: 30px;
+}
+
+.blog-post p {
+  margin-bottom: 1rem;
+  font-size: 20px;
+}

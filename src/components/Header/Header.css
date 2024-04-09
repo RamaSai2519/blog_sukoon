@@ -1,0 +1,44 @@
+/* src/components/Header/Header.css */
+header {
+  display: flex;
+  justify-content: space-between; /* Align children to the start and end of the header */
+  align-items: center;
+  padding-top: 10px;
+  max-width: 1650px;
+  margin: 0 auto;
+}
+
+.logo_svg {
+  margin-left: 0px;
+}
+
+nav ul {
+  list-style: circle;
+  padding: 0px;
+  font-size: large;
+  font-weight: bold;
+  margin: 0px; /* Remove default margin */
+}
+
+nav ul li {
+  padding: 0.4rem 1.5rem; /* Adjust padding as needed */
+  display: inline;
+  margin-left: 0rem;
+}
+
+/* Header.css */
+.outlined-button {
+  padding: 0.5rem 1rem;
+  border: 2px solid black;
+  border-radius: .6em;
+  color: #000;
+  text-decoration: none;
+  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease; /* Transition for smooth color change */
+}
+
+.outlined-button:hover {
+  background-color: #000;
+  color: #fff;
+  border-color: #333; /* Change border color on hover */
+}
+

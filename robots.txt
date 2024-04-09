@@ -1,0 +1,5 @@
+User-agent: *
+Disallow: /admin
+Disallow: /login
+Disallow: /signup
+Sitemap: https://sukoon.love/blog/sitemap.xml
