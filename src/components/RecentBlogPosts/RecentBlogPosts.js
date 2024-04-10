@@ -10,7 +10,7 @@ const RecentBlogPosts = () => {
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    axios.get('http://15.206.127.248/api/blogs')
+    axios.get('/api/blogs')
       .then(response => {
         setBlogs(response.data);
         setLoading(false);
