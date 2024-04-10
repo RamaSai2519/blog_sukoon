@@ -106,7 +106,6 @@ const BlogPost = () => {
       <div className="text-container">
         <div className="blog-text">
           <h2 className="blog-title">{selectedBlog.title}</h2>
-          <p className="blog-description">{selectedBlog.description}</p>
           <div className="blog-description" dangerouslySetInnerHTML={{ __html: selectedBlog.content }} />
         </div>
       </div>
