@@ -15,7 +15,7 @@ const BlogPost = () => {
     // Function to fetch blog data from the server
     const fetchBlogData = async () => {
       try {
-        const response = await axios.get(`http://15.206.127.248/api/blogs/${id}`); // Make GET request to fetch specific blog by ID
+        const response = await axios.get(`/api/blogs/${id}`); // Make GET request to fetch specific blog by ID
         setSelectedBlog(response.data); // Set selectedBlog state with fetched data
         ReactGA.pageview(window.location.pathname + window.location.search); // Track page view
       } catch (error) {

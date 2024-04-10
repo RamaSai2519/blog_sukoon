@@ -11,7 +11,7 @@ const FeaturedBlog = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    axios.get('http://ec2-15-206-127-248.ap-south-1.compute.amazonaws.com/api/featuredblog')
+    axios.get('/api/featuredblog')
       .then(response => {
         setFeaturedBlog(response.data);
         setLoading(false); // Set loading to false after data is fetched
