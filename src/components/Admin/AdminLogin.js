@@ -2,12 +2,15 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 
-const AdminLogin = () => {
+const AdminLogin = ({ onLogin }) => {
     const navigate = useNavigate();
 
     const handleLogin = () => {
+        // Perform login logic
+        // If login is successful, call onLogin function
         onLogin();
-        navigate('/admin/calls');
+        // Redirect to calls page
+        navigate('/calls');
     }
 
     return (
