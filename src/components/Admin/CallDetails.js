@@ -9,7 +9,7 @@ const CallDetails = () => {
 
     useEffect(() => {
         // Fetch details of the specific call using callId
-        axios.get(`/api/calls/${callId}`)
+        axios.get(`/api/calls/${_id}`)
             .then(response => {
                 setCall(response.data);
             })

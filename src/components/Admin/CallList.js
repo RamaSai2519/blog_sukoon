@@ -20,7 +20,7 @@ const CallList = () => {
             <ul>
                 {calls.map(call => (
                     <li key={call.id}>
-                        <Link to={`/calls/${call.id}`}>{call.callId}</Link>
+                        <Link to={`/calls/${call._id}`}>{call.callId}</Link>
                     </li>
                 ))}
             </ul>
