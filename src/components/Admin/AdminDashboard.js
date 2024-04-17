@@ -3,7 +3,6 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { Line } from 'react-chartjs-2';
 import axios from 'axios';
-import ExpertTable from './ExpertTable';
 
 const AdminDashboard = () => {
     const [callData, setCallData] = useState({ labels: [], datasets: [] });
@@ -12,9 +11,13 @@ const AdminDashboard = () => {
         avgDuration: '',
         latestCall: '',
     });
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState('');
 
     useEffect(() => {
-        // Fetch data for the line graph and calculate statistics
+        setLoading(true);
+        setError('');
+
         axios.get('/api/calls')
             .then(response => {
                 const calls = response.data;
@@ -55,11 +58,22 @@ const AdminDashboard = () => {
                     ],
                 };
                 setCallData(newChartData);
+                setLoading(false);
             })
             .catch(error => {
                 console.error('Error fetching call data:', error);
+                setError('Error fetching call data. Please try again later.');
+                setLoading(false);
             });
     }, []);
+
+    if (loading) {
+        return <div>Loading...</div>;
+    }
+
+    if (error) {
+        return <div>Error: {error}</div>;
+    }
 
     return (
         <div>
@@ -82,7 +96,8 @@ const AdminDashboard = () => {
                 </Link>
             </div>
             <div>
-                <ExpertTable />
+                {/* Table displaying all the experts who are online */}
+                {/* We'll add the ExpertTable component here */}
             </div>
         </div>
     );
