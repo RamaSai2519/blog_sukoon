@@ -80,12 +80,12 @@ const AdminDashboard = () => {
             <h2>Admin Dashboard</h2>
             <div>
                 {/* Line graph displaying number of calls each day */}
-                <Line 
-                    data={callData} 
+                <Line
+                    data={callData}
                     options={{
                         scales: {
                             x: {
-                                type: 'category',
+                                type: 'category'
                             }
                         }
                     }}
