@@ -4,7 +4,7 @@ import { useParams } from 'react-router-dom';
 import axios from 'axios';
 
 const CallDetails = () => {
-    const { callId } = useParams();
+    const { _id } = useParams();
     const [call, setCall] = useState(null);
 
     useEffect(() => {
