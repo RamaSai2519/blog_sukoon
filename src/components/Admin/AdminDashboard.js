@@ -85,7 +85,7 @@ const AdminDashboard = () => {
                     options={{
                         scales: {
                             x: {
-                                type: 'time',
+                                type: 'category',
                             }
                         }
                     }}
