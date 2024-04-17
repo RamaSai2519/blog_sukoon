@@ -1,5 +1,5 @@
 // src/App.js
-import React, { Suspense, lazy, useEffect, useState} from 'react';
+import React, { Suspense, lazy, useEffect, useState } from 'react';
 import { Routes, Route } from 'react-router-dom';
 import Header from './components/Header/Header';
 import FeaturedBlog from './components/FeaturedBlog/FeaturedBlog';
@@ -19,7 +19,7 @@ const Home = () => {
   }, [location]);
 
   return (
-    <div style={{maxWidth: '1100px', margin: '0 auto' }}>
+    <div style={{ maxWidth: '1100px', margin: '0 auto' }}>
       <FeaturedBlog />
       <RecentBlogPosts />
     </div>
@@ -31,6 +31,7 @@ const BlogPost = lazy(() => import('./components/BlogPost/BlogPost'));
 
 const App = () => {
   const [contentLoaded, setContentLoaded] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   useEffect(() => {
     // Simulate content loading delay
@@ -50,9 +51,14 @@ const App = () => {
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/blog/:id" element={<BlogPost />} />
-            <Route path="/admin" element={<AdminLogin />} />
-            <Route path="/calls/:callId" element={ <CallDetails /> } />
-            <Route path="/admin/calls" element={<CallList />} />
+            <Route path="/admin" element={<AdminLogin onLogin={() => setIsLoggedIn(true)} />} />
+            {isLoggedIn ? (
+              <>
+                <Route path="/calls" element={<CallList />} />
+                <Route path="/calls/:callId" element={<CallDetails />} />
+              </>
+            ) : (
+              <Route path="/admin" element={<AdminLogin onLogin={() => setIsLoggedIn(true)} />} />)}
           </Routes>
         </Suspense>
       </div>

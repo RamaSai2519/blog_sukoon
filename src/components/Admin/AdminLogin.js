@@ -6,8 +6,7 @@ const AdminLogin = () => {
     const navigate = useNavigate();
 
     const handleLogin = () => {
-        // Perform login logic
-        // If login is successful, redirect to /calls
+        onLogin();
         navigate('/admin/calls');
     }
 
