@@ -4,19 +4,19 @@ import { useParams } from 'react-router-dom';
 import axios from 'axios';
 
 const CallDetails = () => {
-    const { id } = useParams();
+    const { callId } = useParams();
     const [call, setCall] = useState(null);
 
     useEffect(() => {
-        // Fetch details of the selected call from the backend
-        axios.get(`/api/calls/${id}`)
+        // Fetch details of the specific call using callId
+        axios.get(`/api/calls/${callId}`)
             .then(response => {
                 setCall(response.data);
             })
             .catch(error => {
                 console.error('Error fetching call details:', error);
             });
-    }, [id]);
+    }, [callId]);
 
     if (!call) {
         return <div>Loading...</div>;
@@ -25,9 +25,8 @@ const CallDetails = () => {
     return (
         <div>
             <h2>Call Details</h2>
-            <p>ID: {call.id}</p>
             <p>Title: {call.title}</p>
-            {/* Add other details as needed */}
+            {/* Display other details of the call */}
         </div>
     );
 }
