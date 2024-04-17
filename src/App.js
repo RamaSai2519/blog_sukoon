@@ -5,6 +5,8 @@ import Header from './components/Header/Header';
 import FeaturedBlog from './components/FeaturedBlog/FeaturedBlog';
 import RecentBlogPosts from './components/RecentBlogPosts/RecentBlogPosts';
 import Footer from './components/Footer/Footer';
+import AdminLogin from './components/Admin/AdminLogin';
+import CallList from './components/Admin/CallList';
 import { useLocation } from 'react-router-dom';
 import ReactGA from 'react-ga'; // Import ReactGA
 
@@ -47,6 +49,8 @@ const App = () => {
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/blog/:id" element={<BlogPost />} />
+            <Route path="/admin" element={<AdminLogin />} />
+            <Route path="/admin/calls" element={<CallList />} />
           </Routes>
         </Suspense>
       </div>
