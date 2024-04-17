@@ -1,24 +1,39 @@
 // AdminLogin.js
-import React from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 const AdminLogin = ({ onLogin }) => {
     const navigate = useNavigate();
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+    const [error, setError] = useState('');
 
     const handleLogin = () => {
-        // Perform login logic
-        // If login is successful, call onLogin function
-        onLogin();
-        // Redirect to calls page
-        navigate('/calls');
+        // Check if email and password match the admin credentials
+        if (email === 'admin@sukoon.love' && password === 'Care@sukoon123') {
+            // If credentials match, call onLogin function and redirect
+            onLogin();
+            navigate('/calls');
+        } else {
+            // If credentials don't match, display error message
+            setError('Invalid email or password');
+        }
     }
 
     return (
         <div>
             {/* Add your admin login form here */}
             <h2>Admin Login</h2>
-            {/* Add login form inputs and submit button */}
+            <div>
+                <label>Email:</label>
+                <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} />
+            </div>
+            <div>
+                <label>Password:</label>
+                <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} />
+            </div>
             <button onClick={handleLogin}>Login</button>
+            {error && <p>{error}</p>}
         </div>
     );
 }
