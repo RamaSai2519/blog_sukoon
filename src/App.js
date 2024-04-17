@@ -58,7 +58,7 @@ const App = () => {
                         <Route path="/calls/:callId" element={<CallDetails />} />
                     </>
                 ) : (
-                  <Route path="/admin" element={<AdminLogin />} />
+                  <Route path="/calls*" element={<Navigate to="/admin" />} />
                 )}
           </Routes>
         </Suspense>
