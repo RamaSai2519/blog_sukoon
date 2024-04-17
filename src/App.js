@@ -1,6 +1,6 @@
 // src/App.js
 import React, { Suspense, lazy, useEffect, useState } from 'react';
-import { Routes, Route } from 'react-router-dom';
+import { Routes, Route, Navigate } from 'react-router-dom';
 import Header from './components/Header/Header';
 import FeaturedBlog from './components/FeaturedBlog/FeaturedBlog';
 import RecentBlogPosts from './components/RecentBlogPosts/RecentBlogPosts';
@@ -52,9 +52,9 @@ const App = () => {
             <Route path="/" element={<Home />} />
             <Route path="/blog/:id" element={<BlogPost />} />
             {/* Login route */}
-            <Route path="/admin">
-                    <AdminLogin onLogin={() => setIsLoggedIn(true)} />
-                </Route>
+            <Route path="/admin" 
+                    element={<AdminLogin onLogin={() => setIsLoggedIn(true)} />} />
+                
 
                 {/* Protected routes */}
                 {isLoggedIn ? (
@@ -63,7 +63,8 @@ const App = () => {
                         <Route path="/calls/:callId" element={<CallDetails />} />
                     </>
                 ) : (
-                    <Navigate to="/admin" />
+                  <Route path="/admin"
+                  AdminLogin onLogin={() => setIsLoggedIn(true)} />
                 )}
 
                 {/* Redirect to login if not logged in */}
