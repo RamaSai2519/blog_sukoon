@@ -38,7 +38,7 @@ const AdminDashboard = () => {
 
                 // Process call data for the line graph
                 const dailyCalls = calls.reduce((acc, call) => {
-                    const date = new Date(call.initiatedTime.$date);
+                    const date = new Date(call.initiatedTime);
                     const day = date.toLocaleDateString();
                     acc[day] = (acc[day] || 0) + 1;
                     return acc;
