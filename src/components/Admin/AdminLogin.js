@@ -10,7 +10,7 @@ const AdminLogin = ({ onLogin }) => {
 
     const handleLogin = () => {
         // Check if email and password match the admin credentials
-        if (email === 'admin@sukoon.love' && password === 'Care@sukoon123') {
+        if (email === 'admin' && password === '123') {
             // If credentials match, call onLogin function and redirect
             onLogin();
             navigate('/calls');

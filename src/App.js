@@ -6,6 +6,7 @@ import FeaturedBlog from './components/FeaturedBlog/FeaturedBlog';
 import RecentBlogPosts from './components/RecentBlogPosts/RecentBlogPosts';
 import Footer from './components/Footer/Footer';
 import AdminLogin from './components/Admin/AdminLogin';
+import AdminDashboard from './components/Admin/AdminDashboard';
 import CallList from './components/Admin/CallList';
 import CallDetails from './components/Admin/CallDetails';
 import { useLocation } from 'react-router-dom';
@@ -51,9 +52,11 @@ const App = () => {
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/blog/:id" element={<BlogPost />} />
+            <Route path="/admin/dashboard" element={<AdminDashboard />} />
             <Route path="/admin" element={<AdminLogin onLogin={() => setIsLoggedIn(true)} />} />
                 {isLoggedIn ? (
                     <>
+                        
                         <Route path="/calls" element={<CallList />} />
                         <Route path="/calls/:callId" element={<CallDetails />} />
                     </>
