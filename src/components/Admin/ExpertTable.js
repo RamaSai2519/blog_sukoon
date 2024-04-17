@@ -4,17 +4,32 @@ import axios from 'axios';
 
 const ExpertTable = () => {
     const [experts, setExperts] = useState([]);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState('');
 
     useEffect(() => {
-        // Fetch list of online experts from the backend
-        axios.get('/api/experts')
+        setLoading(true);
+        setError('');
+
+        axios.get('/api/experts') // Assuming this endpoint fetches the data of online experts
             .then(response => {
                 setExperts(response.data);
+                setLoading(false);
             })
             .catch(error => {
-                console.error('Error fetching online experts:', error);
+                console.error('Error fetching expert data:', error);
+                setError('Error fetching expert data. Please try again later.');
+                setLoading(false);
             });
     }, []);
+
+    if (loading) {
+        return <div>Loading...</div>;
+    }
+
+    if (error) {
+        return <div>Error: {error}</div>;
+    }
 
     return (
         <div>
@@ -23,6 +38,7 @@ const ExpertTable = () => {
                 <thead>
                     <tr>
                         <th>Name</th>
+                        <th>Specialization</th>
                         <th>Status</th>
                     </tr>
                 </thead>
@@ -30,7 +46,7 @@ const ExpertTable = () => {
                     {experts.map(expert => (
                         <tr key={expert._id}>
                             <td>{expert.name}</td>
-                            <td>Online</td>
+                            <td>{expert.status}</td>
                         </tr>
                     ))}
                 </tbody>

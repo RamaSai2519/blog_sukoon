@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { Line } from 'react-chartjs-2';
 import axios from 'axios';
+import ExpertTable from './ExpertTable';
 
 const AdminDashboard = () => {
     const [callData, setCallData] = useState({ labels: [], datasets: [] });
@@ -97,7 +98,7 @@ const AdminDashboard = () => {
             </div>
             <div>
                 {/* Table displaying all the experts who are online */}
-                {/* We'll add the ExpertTable component here */}
+                <ExpertTable />
             </div>
         </div>
     );
