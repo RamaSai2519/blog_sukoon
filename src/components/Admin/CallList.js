@@ -5,12 +5,12 @@ import { useState, useEffect } from 'react';
 import axios from 'axios';
 
 const CallList = () => {
-  const [calls, setBlogs] = useState([]);
+  const [calls, setCalls] = useState([]);
 
   useEffect(() => {
     axios.get('/api/calls')
       .then(response => {
-        setBlogs(response.data);
+        setCalls(response.data);
       })
   }, []);
 
@@ -19,8 +19,8 @@ const CallList = () => {
             <h2>List of Calls</h2>
             <ul>
                 {calls.map(call => (
-                    <li key={call._id}>
-                        <Link to={`/calls/${call._id}`}>{call.callId}</Link>
+                    <li key={call.callId}>
+                        <Link to={`/calls/${call.callId}`}>{call.callId}</Link>
                     </li>
                 ))}
             </ul>
