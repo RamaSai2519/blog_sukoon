@@ -1,107 +1,118 @@
-// src/components/Admin/AdminDashboard.js
-import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
-import { Line } from 'react-chartjs-2';
-import axios from 'axios';
-import ExpertTable from './ExpertTable';
+import React, { useEffect, useState } from 'react';
+import Chart from 'chart.js/auto';
+import 'chartjs-adapter-luxon';
 
-const AdminDashboard = () => {
-    const [callData, setCallData] = useState({ labels: [], datasets: [] });
-    const [statistics, setStatistics] = useState({
-        primeTimes: '',
-        avgDuration: '',
-        latestCall: '',
-    });
-    const [loading, setLoading] = useState(true);
-    const [error, setError] = useState('');
+const CallGraph = () => {
+  const [chart, setChart] = useState(null);
 
-    useEffect(() => {
-        setLoading(true);
-        setError('');
+  useEffect(() => {
+    console.log("useEffect called");
+    const fetchData = async () => {
+      try {
+        console.log("fetchData called");
+        const callData = await fetchCallData();
+        console.log("Call data fetched:", callData);
+        renderChart(callData);
+      } catch (error) {
+        console.error('Error fetching call data:', error);
+      }
+    };
 
-        axios.get('/api/calls')
-            .then(response => {
-                const calls = response.data;
+    fetchData();
 
-                // Calculate statistics
-                const totalCalls = calls.length;
-                const totalDuration = calls.reduce((acc, call) => acc + call.duration, 0);
-                const avgDuration = totalDuration / totalCalls;
-                const latestCall = calls.length > 0 ? calls[calls.length - 1].callId : '';
+    return () => {
+      console.log("Cleanup");
+      if (chart) {
+        chart.destroy();
+      }
+    };
+  }, []);
 
-                // Update statistics state
-                setStatistics({
-                    primeTimes: '6 PM - 9 PM', // Placeholder for now
-                    avgDuration: `${Math.floor(avgDuration / 60)} minutes`,
-                    latestCall: latestCall,
-                });
+  const fetchCallData = async () => {
+    try {
+      console.log("fetchCallData called");
+      const response = await fetch('/api/calls');
+      if (!response.ok) {
+        throw new Error('Failed to fetch call data');
+      }
+      const contentType = response.headers.get('content-type');
+      if (contentType && contentType.includes('application/json')) {
+        const callData = await response.json();
+        const mappedData = callData.map(call => ({
+          date: new Date(call.initiatedTime?.$date?.$numberLong),
+          calls: 1
+        }));
+        console.log("Call data mapped:", mappedData);
+        return mappedData;
+      } else {
+        throw new Error('Invalid response format');
+      }
+    } catch (error) {
+      console.error('Error fetching call data:', error);
+      return [];
+    }
+  };
 
-                // Process call data for the line graph
-                const dailyCalls = calls.reduce((acc, call) => {
-                    const date = new Date(call.initiatedTime);
-                    const day = date.toLocaleDateString();
-                    acc[day] = (acc[day] || 0) + 1;
-                    return acc;
-                }, {});
-                const labels = Object.keys(dailyCalls);
-                const data = Object.values(dailyCalls);
+  const renderChart = (callData) => {
+    console.log("renderChart called");
+    const labels = callData.map(entry => entry.date);
+    const counts = callData.map(entry => entry.calls);
 
-                const newChartData = {
-                    labels: labels,
-                    datasets: [
-                        {
-                            label: 'Number of Calls',
-                            data: data,
-                            fill: false,
-                            backgroundColor: 'rgb(75, 192, 192)',
-                            borderColor: 'rgba(75, 192, 192, 0.2)',
-                        },
-                    ],
-                };
-                setCallData(newChartData);
-                setLoading(false);
-            })
-            .catch(error => {
-                console.error('Error fetching call data:', error);
-                setError('Error fetching call data. Please try again later.');
-                setLoading(false);
-            });
-    }, []);
+    const ctx = document.getElementById('callChart');
 
-    if (loading) {
-        return <div>Loading...</div>;
+    if (chart) {
+      chart.destroy();
     }
 
-    if (error) {
-        return <div>Error: {error}</div>;
+    if (ctx) {
+      console.log("Chart rendering...");
+      setChart(new Chart(ctx, {
+        type: 'line',
+        data: {
+          labels: labels,
+          datasets: [{
+            label: 'Number of Calls',
+            data: counts,
+            borderColor: 'rgb(75, 192, 192)',
+            fill: false,
+          }]
+        },
+        options: {
+          scales: {
+            x: {
+              type: 'time',
+              time: {
+                unit: 'day',
+                displayFormats: {
+                  day: 'DD',
+                },
+              },
+              title: {
+                display: true,
+                text: 'Date',
+              },
+            },
+            y: {
+              beginAtZero: true,
+              title: {
+                display: true,
+                text: 'Number of Calls',
+              },
+            },
+          },
+        },
+      }));
     }
+  };
 
-    return (
-        <div>
-            <h2>Admin Dashboard</h2>
-            <div>
-                {/* Line graph displaying number of calls each day */}
-                <Line data={callData} />
-            </div>
-            <div>
-                {/* Statistics */}
-                <h3>Statistics</h3>
-                <p>Prime Times for Calls: {statistics.primeTimes}</p>
-                <p>Average Duration of Calls: {statistics.avgDuration}</p>
-                <p>Latest Call: {statistics.latestCall}</p>
-            </div>
-            <div>
-                {/* Button to navigate to the list of all calls */}
-                <Link to="/calls">
-                    <button>View All Calls</button>
-                </Link>
-            </div>
-            <div>
-                {/* Table displaying all the experts who are online */}
-                <ExpertTable />
-            </div>
-        </div>
-    );
-}
+  return (
+    <div>
+      <h2>Number of Calls Over Time</h2>
+      <div style={{ height: '400px', width: '600px' }}>
+        <canvas id="callChart"></canvas>
+      </div>
+    </div>
+  );
+};
 
-export default AdminDashboard;
+export default CallGraph;
