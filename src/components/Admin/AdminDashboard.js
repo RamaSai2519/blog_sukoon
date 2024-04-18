@@ -26,13 +26,13 @@ const CallGraph = () => {
 
   const fetchCallData = async () => {
     try {
-      const response = await fetch('/api/calls');
+      const response = await fetch('api/calls');
       if (!response.ok) {
         throw new Error('Failed to fetch call data');
       }
       const callData = await response.json();
       const mappedData = callData.map(call => ({
-        date: new Date(call.initiatedTime),
+        date: new Date(call.initiatedTime).toDateString(), // Convert to date string to group by day
         calls: 1
       }));
       return mappedData;
@@ -43,9 +43,14 @@ const CallGraph = () => {
   };
 
   const renderChart = (callData) => {
-    const filteredData = callData.filter(entry => entry.date.getFullYear() >= 2024 && entry.calls > 0); // Filter out entries with year less than 2024 and zero calls
-    const labels = filteredData.map(entry => entry.date);
-    const counts = filteredData.map(entry => entry.calls);
+    // Aggregate data by day and sum up calls
+    const aggregatedData = callData.reduce((acc, curr) => {
+      acc[curr.date] = (acc[curr.date] || 0) + curr.calls;
+      return acc;
+    }, {});
+
+    const labels = Object.keys(aggregatedData);
+    const counts = Object.values(aggregatedData);
 
     const ctx = document.getElementById('callChart');
 
@@ -68,13 +73,6 @@ const CallGraph = () => {
         options: {
           scales: {
             x: {
-              type: 'date',
-              time: {
-                unit: 'day',
-                displayFormats: {
-                  day: 'DD',
-                },
-              },
               title: {
                 display: true,
                 text: 'Date',
