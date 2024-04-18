@@ -4,6 +4,7 @@ import 'chartjs-adapter-luxon';
 
 const CallGraph = () => {
   const [chart, setChart] = useState(null);
+  const [timeframe, setTimeframe] = useState('day'); // Default timeframe is day
 
   useEffect(() => {
     const fetchData = async () => {
@@ -22,11 +23,11 @@ const CallGraph = () => {
         chart.destroy();
       }
     };
-  }, []);
+  }, [timeframe]);
 
   const fetchCallData = async () => {
     try {
-      const response = await fetch('/api/calls');
+      const response = await fetch(`/api/calls?timeframe=${timeframe}`);
       if (!response.ok) {
         throw new Error('Failed to fetch call data');
       }
@@ -86,9 +87,25 @@ const CallGraph = () => {
     }
   };
 
+  const handleTimeframeChange = (event) => {
+    setTimeframe(event.target.value);
+  };
+
   return (
     <div>
       <h2>Number of Calls Over Time</h2>
+      <div>
+        <label>
+          Select Timeframe:
+          <select value={timeframe} onChange={handleTimeframeChange}>
+            <option value="day">Day</option>
+            <option value="week">Week</option>
+            <option value="month">Month</option>
+            <option value="year">Year</option>
+            <option value="all">All</option>
+          </select>
+        </label>
+      </div>
       <div style={{ height: '400px', width: '600px' }}>
         <canvas id="callChart"></canvas>
       </div>
