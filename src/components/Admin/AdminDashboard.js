@@ -10,7 +10,8 @@ const CallGraph = () => {
     const fetchData = async () => {
       try {
         const callData = await fetchCallData();
-        renderChart(callData);
+        const filteredData = filterData(callData);
+        renderChart(filteredData);
       } catch (error) {
         console.error('Error fetching call data:', error);
       }
@@ -27,43 +28,43 @@ const CallGraph = () => {
 
   const fetchCallData = async () => {
     try {
-      let startDate = new Date();
-      switch (timeframe) {
-        case 'week':
-          startDate.setDate(startDate.getDate() - 7);
-          break;
-        case 'month':
-          startDate.setMonth(startDate.getMonth() - 1);
-          break;
-        case 'year':
-          startDate.setFullYear(startDate.getFullYear() - 1);
-          break;
-        default:
-          // For 'day' timeframe, use last 24 hours
-          startDate.setHours(startDate.getHours() - 24);
-      }
-
-      const formattedStartDate = startDate.toISOString();
-
-      const response = await fetch(`/api/calls?startDate=${formattedStartDate}`);
+      const response = await fetch('/api/calls');
       if (!response.ok) {
         throw new Error('Failed to fetch call data');
       }
       const callData = await response.json();
-      const mappedData = callData.map(call => ({
-        date: new Date(call.initiatedTime).toDateString(), // Convert to date string to group by day
-        calls: 1
-      }));
-      return mappedData;
+      return callData;
     } catch (error) {
       console.error('Error fetching call data:', error);
       return [];
     }
   };
 
+  const filterData = (callData) => {
+    let startDate = new Date();
+    switch (timeframe) {
+      case 'week':
+        startDate.setDate(startDate.getDate() - 7);
+        break;
+      case 'month':
+        startDate.setMonth(startDate.getMonth() - 1);
+        break;
+      case 'year':
+        startDate.setFullYear(startDate.getFullYear() - 1);
+        break;
+      default:
+        // For 'day' timeframe, use last 24 hours
+        startDate.setHours(startDate.getHours() - 24);
+    }
+
+    const filteredData = callData.filter(call => new Date(call.initiatedTime) > startDate);
+    return filteredData;
+  };
+
   const renderChart = (callData) => {
     const aggregatedData = callData.reduce((acc, curr) => {
-      acc[curr.date] = (acc[curr.date] || 0) + curr.calls;
+      const date = new Date(curr.initiatedTime).toDateString();
+      acc[date] = (acc[date] || 0) + 1;
       return acc;
     }, {});
 
