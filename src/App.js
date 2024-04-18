@@ -1,4 +1,3 @@
-// src/App.js
 import React, { Suspense, lazy, useEffect, useState } from 'react';
 import { Routes, Route, Navigate } from 'react-router-dom';
 import Header from './components/Header/Header';
@@ -29,20 +28,23 @@ const Home = () => {
 
 const BlogPost = lazy(() => import('./components/BlogPost/BlogPost'));
 
-
 const App = () => {
-  const [contentLoaded, setContentLoaded] = useState(false);
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  // Check if user is already logged in using localStorage
+  const [isLoggedIn, setIsLoggedIn] = useState(localStorage.getItem('isLoggedIn') === 'true');
 
-  useEffect(() => {
-    // Simulate content loading delay
-    const timer = setTimeout(() => {
-      setContentLoaded(true);
-    }, 10000); // Adjust the delay time as needed
+  // Function to handle login
+  const handleLogin = () => {
+    setIsLoggedIn(true);
+    // Save login state to localStorage
+    localStorage.setItem('isLoggedIn', 'true');
+  }
 
-    // Clear the timer when the component unmounts
-    return () => clearTimeout(timer);
-  }, []);
+  // Function to handle logout
+  const handleLogout = () => {
+    setIsLoggedIn(false);
+    // Remove login state from localStorage
+    localStorage.removeItem('isLoggedIn');
+  }
 
   return (
     <div>
@@ -52,7 +54,8 @@ const App = () => {
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/blog/:id" element={<BlogPost />} />
-            <Route path="/admin" element={<AdminLogin onLogin={() => setIsLoggedIn(true)} />} />
+            <Route path="/admin" element={<AdminLogin onLogin={handleLogin} />} />
+            {/* Protected routes */}
             {isLoggedIn ? (
               <>
                 <Route path="/calls/dashboard" element={<AdminDashboard />} />
@@ -60,12 +63,12 @@ const App = () => {
                 <Route path="/calls/:callId" element={<CallDetails />} />
               </>
             ) : (
-              <Route path="/calls*" element={<Navigate to="/admin" />} />              
+              <Route path="/calls*" element={<Navigate to="/admin" />} />
             )}
           </Routes>
         </Suspense>
       </div>
-      {contentLoaded && <Footer />}
+      <Footer />
     </div>
   );
 }

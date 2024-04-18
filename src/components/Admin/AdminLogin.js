@@ -13,7 +13,7 @@ const AdminLogin = ({ onLogin }) => {
         if (email === 'admin' && password === '123') {
             // If credentials match, call onLogin function and redirect
             onLogin();
-            navigate('/calls');
+            navigate('/calls/dashboard');
         } else {
             // If credentials don't match, display error message
             setError('Invalid email or password');
