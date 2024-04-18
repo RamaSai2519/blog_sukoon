@@ -27,7 +27,25 @@ const CallGraph = () => {
 
   const fetchCallData = async () => {
     try {
-      const response = await fetch(`/api/calls?timeframe=${timeframe}`);
+      let startDate = new Date();
+      switch (timeframe) {
+        case 'week':
+          startDate.setDate(startDate.getDate() - 7);
+          break;
+        case 'month':
+          startDate.setMonth(startDate.getMonth() - 1);
+          break;
+        case 'year':
+          startDate.setFullYear(startDate.getFullYear() - 1);
+          break;
+        default:
+          // For 'day' timeframe, use last 24 hours
+          startDate.setHours(startDate.getHours() - 24);
+      }
+
+      const formattedStartDate = startDate.toISOString();
+
+      const response = await fetch(`/api/calls?startDate=${formattedStartDate}`);
       if (!response.ok) {
         throw new Error('Failed to fetch call data');
       }
@@ -102,7 +120,6 @@ const CallGraph = () => {
             <option value="week">Week</option>
             <option value="month">Month</option>
             <option value="year">Year</option>
-            <option value="all">All</option>
           </select>
         </label>
       </div>
