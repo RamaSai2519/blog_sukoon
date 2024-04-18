@@ -43,7 +43,7 @@ const CallGraph = () => {
   };
 
   const renderChart = (callData) => {
-    const filteredData = callData.filter(entry => entry.calls > 0);
+    const filteredData = callData.filter(entry => entry.date.getFullYear() >= 2024 && entry.calls > 0); // Filter out entries with year less than 2024 and zero calls
     const labels = filteredData.map(entry => entry.date);
     const counts = filteredData.map(entry => entry.calls);
 
