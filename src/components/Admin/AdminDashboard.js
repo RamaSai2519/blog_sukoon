@@ -68,7 +68,7 @@ const CallGraph = () => {
         options: {
           scales: {
             x: {
-              type: 'time',
+              type: 'date',
               time: {
                 unit: 'day',
                 displayFormats: {
