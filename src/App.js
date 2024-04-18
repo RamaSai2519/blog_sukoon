@@ -52,17 +52,16 @@ const App = () => {
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/blog/:id" element={<BlogPost />} />
-            <Route path="/admin/dashboard" element={<AdminDashboard />} />
             <Route path="/admin" element={<AdminLogin onLogin={() => setIsLoggedIn(true)} />} />
-                {isLoggedIn ? (
-                    <>
-                        
-                        <Route path="/calls" element={<CallList />} />
-                        <Route path="/calls/:callId" element={<CallDetails />} />
-                    </>
-                ) : (
-                  <Route path="/calls*" element={<Navigate to="/admin" />} />
-                )}
+            {isLoggedIn ? (
+              <>
+                <Route path="/calls/dashboard" element={<AdminDashboard />} />
+                <Route path="/calls" element={<CallList />} />
+                <Route path="/calls/:callId" element={<CallDetails />} />
+              </>
+            ) : (
+              <Route path="/calls*" element={<Navigate to="/admin" />} />              
+            )}
           </Routes>
         </Suspense>
       </div>
