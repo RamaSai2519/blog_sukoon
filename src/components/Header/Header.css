@@ -26,12 +26,14 @@ nav ul li {
   margin-left: 0rem;
 }
 
-/* Header.css */
 .outlined-button {
   padding: 0.5rem 1rem;
   border: 2px solid black;
   border-radius: .6em;
   color: #000;
+  font-family: 'Custom Font';
+  font-size: large;
+  font-weight: bold;
   text-decoration: none;
   transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease; /* Transition for smooth color change */
 }
