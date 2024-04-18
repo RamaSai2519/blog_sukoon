@@ -1,5 +1,5 @@
 import React, { Suspense, lazy, useEffect, useState } from 'react';
-import { Routes, Route, Navigate } from 'react-router-dom';
+import { Routes, Route, Navigate, Link } from 'react-router-dom';
 import Header from './components/Header/Header';
 import FeaturedBlog from './components/FeaturedBlog/FeaturedBlog';
 import RecentBlogPosts from './components/RecentBlogPosts/RecentBlogPosts';
@@ -29,38 +29,33 @@ const Home = () => {
 const BlogPost = lazy(() => import('./components/BlogPost/BlogPost'));
 
 const App = () => {
-  // Check if user is already logged in using localStorage
   const [isLoggedIn, setIsLoggedIn] = useState(localStorage.getItem('isLoggedIn') === 'true');
 
-  // Function to handle login
   const handleLogin = () => {
     setIsLoggedIn(true);
-    // Save login state to localStorage
     localStorage.setItem('isLoggedIn', 'true');
   }
 
-  // Function to handle logout
   const handleLogout = () => {
     setIsLoggedIn(false);
-    // Remove login state from localStorage
     localStorage.removeItem('isLoggedIn');
   }
 
   return (
     <div>
-      <Header />
+      <Header isLoggedIn={isLoggedIn} onLogout={handleLogout} />
       <div>
         <Suspense fallback={<div>Loading...</div>}>
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/blog/:id" element={<BlogPost />} />
             <Route path="/admin" element={<AdminLogin onLogin={handleLogin} />} />
-            {/* Protected routes */}
             {isLoggedIn ? (
               <>
                 <Route path="/calls/dashboard" element={<AdminDashboard />} />
                 <Route path="/calls" element={<CallList />} />
                 <Route path="/calls/:callId" element={<CallDetails />} />
+                <Route path="*" element={<Navigate to="/calls/dashboard" />} />
               </>
             ) : (
               <Route path="/calls*" element={<Navigate to="/admin" />} />
