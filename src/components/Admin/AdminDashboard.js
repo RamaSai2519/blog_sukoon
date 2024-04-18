@@ -43,6 +43,7 @@ const CallGraph = () => {
   };
 
   const renderChart = (callData) => {
+    const filteredData = callData.filter(entry => entry.calls > 0); // Filter out entries with zero calls
     const labels = callData.map(entry => entry.date);
     const counts = callData.map(entry => entry.calls);
 
