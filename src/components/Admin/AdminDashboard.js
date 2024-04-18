@@ -6,12 +6,9 @@ const CallGraph = () => {
   const [chart, setChart] = useState(null);
 
   useEffect(() => {
-    console.log("useEffect called");
     const fetchData = async () => {
       try {
-        console.log("fetchData called");
         const callData = await fetchCallData();
-        console.log("Call data fetched:", callData);
         renderChart(callData);
       } catch (error) {
         console.error('Error fetching call data:', error);
@@ -21,7 +18,6 @@ const CallGraph = () => {
     fetchData();
 
     return () => {
-      console.log("Cleanup");
       if (chart) {
         chart.destroy();
       }
@@ -30,23 +26,16 @@ const CallGraph = () => {
 
   const fetchCallData = async () => {
     try {
-      console.log("fetchCallData called");
-      const response = await fetch('/api/calls');
+      const response = await fetch('http:/127.0.0.1:80/api/calls');
       if (!response.ok) {
         throw new Error('Failed to fetch call data');
       }
-      const contentType = response.headers.get('content-type');
-      if (contentType && contentType.includes('application/json')) {
-        const callData = await response.json();
-        const mappedData = callData.map(call => ({
-          date: new Date(call.initiatedTime?.$date?.$numberLong),
-          calls: 1
-        }));
-        console.log("Call data mapped:", mappedData);
-        return mappedData;
-      } else {
-        throw new Error('Invalid response format');
-      }
+      const callData = await response.json();
+      const mappedData = callData.map(call => ({
+        date: new Date(call.initiatedTime),
+        calls: 1
+      }));
+      return mappedData;
     } catch (error) {
       console.error('Error fetching call data:', error);
       return [];
@@ -54,7 +43,6 @@ const CallGraph = () => {
   };
 
   const renderChart = (callData) => {
-    console.log("renderChart called");
     const labels = callData.map(entry => entry.date);
     const counts = callData.map(entry => entry.calls);
 
@@ -65,7 +53,6 @@ const CallGraph = () => {
     }
 
     if (ctx) {
-      console.log("Chart rendering...");
       setChart(new Chart(ctx, {
         type: 'line',
         data: {
