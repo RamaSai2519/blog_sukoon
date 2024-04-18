@@ -43,7 +43,6 @@ const CallGraph = () => {
   };
 
   const renderChart = (callData) => {
-    // Aggregate data by day and sum up calls
     const aggregatedData = callData.reduce((acc, curr) => {
       acc[curr.date] = (acc[curr.date] || 0) + curr.calls;
       return acc;
@@ -64,10 +63,7 @@ const CallGraph = () => {
         data: {
           labels: labels,
           datasets: [{
-            label: 'Number of Calls',
-            data: counts,
-            borderColor: 'rgb(75, 192, 192)',
-            fill: false,
+            data: counts
           }]
         },
         options: {
