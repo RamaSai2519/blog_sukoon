@@ -26,7 +26,7 @@ const CallGraph = () => {
 
   const fetchCallData = async () => {
     try {
-      const response = await fetch('api/calls');
+      const response = await fetch('/api/calls');
       if (!response.ok) {
         throw new Error('Failed to fetch call data');
       }
