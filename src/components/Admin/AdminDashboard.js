@@ -4,7 +4,7 @@ import 'chartjs-adapter-luxon';
 
 const CallGraph = () => {
   const [chart, setChart] = useState(null);
-  const [timeframe, setTimeframe] = useState('day'); // Default timeframe is day
+  const [timeframe, setTimeframe] = useState('week'); // Default timeframe is day
 
   useEffect(() => {
     const fetchData = async () => {
@@ -43,9 +43,6 @@ const CallGraph = () => {
   const filterData = (callData) => {
     let startDate = new Date();
     switch (timeframe) {
-      case 'week':
-        startDate.setDate(startDate.getDate() - 7);
-        break;
       case 'month':
         startDate.setMonth(startDate.getMonth() - 1);
         break;
@@ -53,8 +50,7 @@ const CallGraph = () => {
         startDate.setFullYear(startDate.getFullYear() - 1);
         break;
       default:
-        // For 'day' timeframe, use last 24 hours
-        startDate.setHours(startDate.getHours() - 24);
+        startDate.setDate(startDate.getDate() - 7);
     }
 
     const filteredData = callData.filter(call => new Date(call.initiatedTime) > startDate);
@@ -117,7 +113,6 @@ const CallGraph = () => {
         <label>
           Select Timeframe:
           <select value={timeframe} onChange={handleTimeframeChange}>
-            <option value="day">Day</option>
             <option value="week">Week</option>
             <option value="month">Month</option>
             <option value="year">Year</option>
