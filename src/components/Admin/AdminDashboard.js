@@ -81,7 +81,6 @@ const CallGraph = () => {
               },
             },
             y: {
-              beginAtZero: true,
               title: {
                 display: true,
                 text: 'Number of Calls',
