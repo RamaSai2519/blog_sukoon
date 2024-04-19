@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import CallGraph from './CallGraph';
 import ExpertGraph from './ExpertGraph';
+import OnlineSaarthisTable from './OnlineSaarthisTable';
 
 const AdminDashboard = () => {
   const [totalCalls, setTotalCalls] = useState([]);
@@ -16,17 +17,20 @@ const AdminDashboard = () => {
 
   const fetchData = async () => {
     try {
-      const [callsResponse, successfulCallsResponse] = await Promise.all([
+      const [callsResponse, successfulCallsResponse, onlineSaarthisResponse] = await Promise.all([
         axios.get('/api/calls'),
-        axios.get('/api/successful-calls')
+        axios.get('/api/successful-calls'),
+        axios.get('/api/online-saarthis')
       ]);
 
       const callsData = callsResponse.data;
       const successfulCallsData = successfulCallsResponse.data;
+      const onlineSaarthisData = onlineSaarthisResponse.data;
 
       setTotalCalls(callsData);
       setSuccessfulCalls(successfulCallsData);
       setTotalUsers(calculateTotalUsers(callsData));
+      setOnlineSaarthis(onlineSaarthisData);
     } catch (error) {
       console.error('Error fetching data:', error);
     }
@@ -45,7 +49,7 @@ const AdminDashboard = () => {
         <p>Total Calls: {totalCalls.length}</p>
         <p>Total Successful Calls: {successfulCalls.length}</p>
         <p>Total Users: {totalUsers}</p>
-        <p>Online Saarthis: {onlineSaarthis.length}</p>
+        <OnlineSaarthisTable onlineSaarthis={onlineSaarthis} />
       </div>
       <CallGraph />
       <ExpertGraph />
