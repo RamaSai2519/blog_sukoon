@@ -134,9 +134,9 @@ const CallGraph = () => {
   };
 
   return (
-    <div className='calls-table' style={{ height: 'auto', width: '100%' }}>
-      <h2 style={{ display: 'inline-block', marginRight: '10px' }}>Number of Calls Over Time</h2>
-      <div className='drop-down' style={{ display: 'inline-block' }}>
+    <div className='calls-table' style={{ height: 'auto', width: '100%', display: 'flex', justifyContent: 'space-between' }}>
+      <h2>Number of Calls Over Time</h2>
+      <div className='drop-down'>
         <label>
           <select value={timeframe} onChange={handleTimeframeChange}>
             <option value="week">Week</option>
@@ -146,7 +146,7 @@ const CallGraph = () => {
         </label>
       </div>
       <div className='call-chart' style={{ height: '100%', width: '100%' }}>
-        <canvas id="callChart"></canvas>
+        <canvas id="callChart" style={{ height: '100%', width: '100%' }}></canvas>
       </div>
     </div>
   );
