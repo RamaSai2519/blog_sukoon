@@ -96,9 +96,13 @@ const CallGraph = () => {
               },
             },
             y: {
+              display: false,
               title: {
                 display: true,
                 text: 'Number of Calls',
+              },
+              grid: {
+                display: false,
               },
             },
           },
@@ -106,20 +110,6 @@ const CallGraph = () => {
             legend: {
               display: false, // Hide legend
             },
-            tooltip: {
-              callbacks: {
-                label: (context) => {
-                  const label = context.dataset.label || '';
-                  if (context.parsed.y !== null) {
-                    label += ': ' + context.parsed.y;
-                  }
-                  if (context.parsed.x !== null) {
-                    label += ' (' + new Date(context.parsed.x).toDateString() + ')';
-                  }
-                  return label;
-                }
-              }
-            }
           },
         },
       }));
@@ -142,6 +132,9 @@ const CallGraph = () => {
   return (
     <div className='calls-table' style={{ height: 'auto', width: '100%' }}>
       <h2>Number of Calls Over Time</h2>
+      <div className='call-chart' style={{ height: '100%', width: '100%' }}>
+        <canvas id="callChart"></canvas>
+      </div>
       <div>
         <label>
           Select Timeframe:
@@ -151,9 +144,6 @@ const CallGraph = () => {
             <option value="year">Year</option>
           </select>
         </label>
-      </div>
-      <div className='call-chart' style={{ height: '100%', width: '100%' }}>
-        <canvas id="callChart"></canvas>
       </div>
     </div>
   );
