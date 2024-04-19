@@ -130,7 +130,7 @@ const CallGraph = () => {
   };
 
   return (
-    <div className='calls-table' style={{ height: 'auto', width: '100%' }}>
+    <div className='calls-table' style={{ height: '100%', width: '100%' }}>
       <h2>Number of Calls Over Time</h2>
       <div>
         <label>
