@@ -25,7 +25,7 @@ const AdminDashboard = () => {
       const expertsResponse = await axios.get('/api/experts');
   
       // Check if any of the responses are empty
-      if (!callsResponse.data || !usersResponse.data || !expertsResponse.data || !latestCallsResponse.data) {
+      if (!callsResponse.data || !usersResponse.data || !expertsResponse.data ) {
         throw new Error('Empty response received');
       }
   
@@ -34,7 +34,6 @@ const AdminDashboard = () => {
       setSuccessfulCalls(callsResponse.data.successful_calls);
       setTotalUsers(usersResponse.data.users.length);
       setOnlineSaarthis(expertsResponse.data.total_online_saarthis);
-      setLatestCalls(latestCallsResponse.data.latest_calls);
     } catch (error) {
       console.error('Error fetching data:', error);
     }
@@ -50,7 +49,6 @@ const AdminDashboard = () => {
         <p>Total Successful Calls: {successfulCalls}</p>
         <p>Total Users: {totalUsers}</p>
         <p>Online Saarthis: {onlineSaarthis.length}</p>
-        <h3>Latest 5 Calls:</h3>
         <ul>
           {totalCalls.map(call => (
             <li key={call._id}>{call.initiatedTime} - {call.status}</li>
