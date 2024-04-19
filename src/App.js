@@ -52,6 +52,7 @@ const App = () => {
             <Route path="/admin" element={<AdminLogin onLogin={handleLogin} />} />
             {isLoggedIn ? (
               <>
+                <Route path="/admin" element={<Navigate to="/calls/dashboard" />} />
                 <Route path="/calls/dashboard" element={<AdminDashboard />} />
                 <Route path="/calls" element={<CallList />} />
                 <Route path="/calls/:callId" element={<CallDetails />} />
