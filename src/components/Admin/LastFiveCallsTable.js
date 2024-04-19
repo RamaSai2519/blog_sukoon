@@ -11,7 +11,7 @@ const LastFiveCallsTable = () => {
   const fetchLastFiveCalls = async () => {
     try {
       const response = await axios.get('/api/last-five-calls');
-      setLastFiveCalls(response.data);
+      setLastFiveCalls(response.data.reverse());
     } catch (error) {
       console.error('Error fetching last five calls:', error);
     }
