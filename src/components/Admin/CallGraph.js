@@ -90,7 +90,10 @@ const CallGraph = () => {
         options: {
           scales: {
             x: {
-              display: false, // Hide x-axis labels
+              display: false,
+              grid: {
+                display: false,
+              },
             },
             y: {
               title: {
@@ -117,32 +120,6 @@ const CallGraph = () => {
                 }
               }
             }
-          },
-          elements: {
-            line: {
-              borderWidth: 1, // Set border width of line
-              fill: true, // Fill area under line
-            },
-          },
-          layout: {
-            padding: {
-              top: 20, // Add padding to top
-              right: 20, // Add padding to right
-              bottom: 20, // Add padding to bottom
-              left: 20, // Add padding to left
-            },
-          },
-          scales: {
-            x: {
-              grid: {
-                display: false, // Hide x-axis gridlines
-              },
-            },
-            y: {
-              grid: {
-                display: false, // Hide y-axis gridlines
-              },
-            },
           },
         },
       }));
