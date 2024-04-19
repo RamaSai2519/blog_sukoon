@@ -64,16 +64,16 @@ const CallGraph = () => {
       acc[date] = (acc[date] || 0) + 1;
       return acc;
     }, {});
-  
+
     const labels = Object.keys(aggregatedData);
     const counts = Object.values(aggregatedData);
-  
+
     const ctx = document.getElementById('callChart');
-  
+
     if (chart) {
       chart.destroy();
     }
-  
+
     if (ctx) {
       setChart(new Chart(ctx, {
         type: 'line',
@@ -83,7 +83,7 @@ const CallGraph = () => {
             data: counts,
             borderColor: 'rgba(54, 162, 235, 1)', // Line color
             backgroundColor: ctx.getContext('2d').createLinearGradient(0, 0, 0, 400).addColorStop(0, 'rgba(54, 162, 235, 0.5)').addColorStop(1, 'rgba(54, 162, 235, 0)'), // Gradient color
-            tension: 0.4, // Smoothness of the line
+            tension: 0.4,
           }]
         },
         options: {
@@ -101,16 +101,10 @@ const CallGraph = () => {
               },
             },
           },
-          plugins: {
-            legend: {
-              display: false, // Hide legend
-            },
-          },
         },
       }));
     }
   };
-  
 
   const handleTimeframeChange = (event) => {
     setTimeframe(event.target.value);
