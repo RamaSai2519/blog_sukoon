@@ -57,19 +57,21 @@ const ExpertGraph = () => {
 
     const renderChart = (callData, expertData) => {
         const expertCalls = {};
-
+      
         callData.forEach(call => {
-            const expertId = call.expert; // Assuming call.expert contains the expert ID
-            const expert = expertData[expertId];
-            if (expert) {
-                const expertName = expert.name;
-                expertCalls[expertName] = (expertCalls[expertName] || 0) + 1;
-            }
-        });        
-
-
+          const expertId = call.expert; // Assuming call.expert contains the expert ID
+          const expert = expertData[expertId];
+          console.log("Expert:", expert); // Log expert to check if it's fetched correctly
+          if (expert) {
+            const expertName = expert.name;
+            expertCalls[expertName] = (expertCalls[expertName] || 0) + 1;
+          }
+        });
+        console.log("Expert Calls:", expertCalls); // Log expertCalls to check the result
+      
         const labels = Object.keys(expertCalls);
         const counts = Object.values(expertCalls);
+      
 
         const ctx = document.getElementById('expertCallChart');
 
