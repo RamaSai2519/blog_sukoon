@@ -90,6 +90,8 @@ const CallGraph = () => {
           datasets: [{
             data: counts,
             borderColor: gradient,
+            pointRadius: 0,
+            pointHoverRadius: 2,
             tension: 0.4
           }]
         },
