@@ -5,14 +5,18 @@ import ExpertCallGraph from './ExpertCallGraph';
 
 const AdminDashboard = () => {
   const [callData, setCallData] = useState([]);
+  const [expertData, setExpertData] = useState({});
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         const callData = await fetchCallData();
         setCallData(callData);
+        
+        const expertData = await fetchExpertData();
+        setExpertData(expertData);
       } catch (error) {
-        console.error('Error fetching call data:', error);
+        console.error('Error fetching data:', error);
       }
     };
 
@@ -33,11 +37,25 @@ const AdminDashboard = () => {
     }
   };
 
+  const fetchExpertData = async () => {
+    try {
+      const response = await fetch('/api/experts');
+      if (!response.ok) {
+        throw new Error('Failed to fetch expert data');
+      }
+      const expertData = await response.json();
+      return expertData;
+    } catch (error) {
+      console.error('Error fetching expert data:', error);
+      return [];
+    }
+  };
+
   return (
     <div>
       <h2>Admin Dashboard</h2>
       <CallGraph />
-      <ExpertCallGraph callData={callData} />
+      <ExpertCallGraph callData={callData} expertData={expertData} />
     </div>
   );
 }

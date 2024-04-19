@@ -2,19 +2,20 @@
 import React, { useEffect, useState } from 'react';
 import Chart from 'chart.js/auto';
 
-const ExpertCallGraph = ({ callData }) => {
+const ExpertCallGraph = ({ callData, expertData }) => {
   const [chart, setChart] = useState(null);
 
   useEffect(() => {
-    renderChart(callData);
-  }, [callData]);
+    renderChart(callData, expertData);
+  }, [callData, expertData]);
 
-  const renderChart = (callData) => {
+  const renderChart = (callData, expertData) => {
     const expertCalls = {};
 
     callData.forEach(call => {
       const expertId = call.expert.$oid;
-      expertCalls[expertId] = (expertCalls[expertId] || 0) + 1;
+      const expertName = expertData[expertId].name;
+      expertCalls[expertName] = (expertCalls[expertName] || 0) + 1;
     });
 
     const labels = Object.keys(expertCalls);
@@ -44,7 +45,7 @@ const ExpertCallGraph = ({ callData }) => {
             x: {
               title: {
                 display: true,
-                text: 'Expert ID',
+                text: 'Expert Name',
               },
             },
             y: {
