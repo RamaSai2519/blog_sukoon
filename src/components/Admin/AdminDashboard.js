@@ -61,13 +61,17 @@ const AdminDashboard = () => {
               <h2>Successful Calls</h2>
               <h3>{successfulCalls.length}</h3>
             </div>
+            <div className="grid-tile-1">
+              <h2>Online Saarthis</h2>
+              <OnlineSaarthisTable onlineSaarthis={onlineSaarthis} />
+            </div>
           </div>
         </div>
         <div className="dashboard-tile">
           <CallGraph />
         </div>
         <div className="dashboard-tile">
-          <OnlineSaarthisTable onlineSaarthis={onlineSaarthis} />
+          
         </div>
         <div className="dashboard-tile">
           <LastFiveCallsTable />
