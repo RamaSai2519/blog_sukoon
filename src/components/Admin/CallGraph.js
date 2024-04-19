@@ -132,9 +132,6 @@ const CallGraph = () => {
   return (
     <div className='calls-table' style={{ height: 'auto', width: '100%' }}>
       <h2>Number of Calls Over Time</h2>
-      <div className='call-chart' style={{ height: '100%', width: '100%' }}>
-        <canvas id="callChart"></canvas>
-      </div>
       <div>
         <label>
           Select Timeframe:
@@ -144,6 +141,9 @@ const CallGraph = () => {
             <option value="year">Year</option>
           </select>
         </label>
+      </div>
+      <div className='call-chart' style={{ height: '100%', width: '100%' }}>
+        <canvas id="callChart"></canvas>
       </div>
     </div>
   );
