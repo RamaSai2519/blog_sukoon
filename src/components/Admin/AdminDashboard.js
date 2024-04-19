@@ -9,7 +9,6 @@ const AdminDashboard = () => {
   const [successfulCalls, setSuccessfulCalls] = useState(0);
   const [totalUsers, setTotalUsers] = useState(0);
   const [onlineSaarthis, setOnlineSaarthis] = useState([]);
-  const [latestCalls, setLatestCalls] = useState([]);
 
   useEffect(() => {
     fetchData();
@@ -24,7 +23,6 @@ const AdminDashboard = () => {
       const callsResponse = await axios.get('/api/calls');
       const usersResponse = await axios.get('/api/users');
       const expertsResponse = await axios.get('/api/experts');
-      const latestCallsResponse = await axios.get('/api/latest_calls');
   
       // Check if any of the responses are empty
       if (!callsResponse.data || !usersResponse.data || !expertsResponse.data || !latestCallsResponse.data) {
@@ -54,7 +52,7 @@ const AdminDashboard = () => {
         <p>Online Saarthis: {onlineSaarthis.length}</p>
         <h3>Latest 5 Calls:</h3>
         <ul>
-          {latestCalls.map(call => (
+          {totalCalls.map(call => (
             <li key={call._id}>{call.initiatedTime} - {call.status}</li>
           ))}
         </ul>
