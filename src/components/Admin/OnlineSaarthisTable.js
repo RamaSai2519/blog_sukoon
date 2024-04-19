@@ -9,7 +9,6 @@ const OnlineSaarthisTable = ({ onlineSaarthis }) => {
         <thead>
           <tr>
             <th>Name</th>
-            <th>Status</th>
             <th>Busy</th>
             {/* Add more columns as needed */}
           </tr>
@@ -18,7 +17,6 @@ const OnlineSaarthisTable = ({ onlineSaarthis }) => {
           {onlineSaarthis.map(saarthi => (
             <tr key={saarthi._id}>
               <td>{saarthi.name}</td>
-              <td>{saarthi.status}</td>
               <td>{saarthi.isBusy ? 'Yes' : 'No'}</td>
               {/* Add more columns as needed */}
             </tr>
