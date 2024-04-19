@@ -91,7 +91,7 @@ const CallGraph = () => {
             data: counts,
             borderColor: gradient,
             borderWidth: 5,
-            pointRadius: 1,
+            pointRadius: 2,
             pointBorderWidth: 0,
             pointBackgroundColor: 'rgba(69, 120, 249, 1)',
             tension: 0.4
@@ -135,9 +135,8 @@ const CallGraph = () => {
   return (
     <div className='calls-table' style={{ height: 'auto', width: '100%' }}>
       <h2>Number of Calls Over Time</h2>
-      <div>
+      <div className='drop-down'>
         <label>
-          Select Timeframe:
           <select value={timeframe} onChange={handleTimeframeChange}>
             <option value="week">Week</option>
             <option value="month">Month</option>
