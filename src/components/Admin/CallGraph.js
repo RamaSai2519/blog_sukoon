@@ -82,7 +82,7 @@ const CallGraph = () => {
           datasets: [{
             data: counts,
             borderColor: 'rgba(54, 162, 235, 1)', // Line color
-            backgroundColor: ctx.getContext('2d').createLinearGradient(0, 0, 0, 400).addColorStop(0, 'rgba(54, 162, 235, 0.5)').addColorStop(1, 'rgba(54, 162, 235, 0)'), // Gradient color
+            backgroundColor: ctx.getContext('2d').createLinearGradient(0, 0, 0, 400),
             tension: 0.4,
           }]
         },
@@ -101,8 +101,23 @@ const CallGraph = () => {
               },
             },
           },
+          plugins: {
+            legend: {
+              display: false, // Hide legend
+            },
+          },
         },
       }));
+
+      const gradient = ctx.getContext('2d').createLinearGradient(0, 0, 0, 400);
+      gradient.addColorStop(0, 'rgba(54, 162, 235, 0.5)'); // Start color
+      gradient.addColorStop(1, 'rgba(54, 162, 235, 0)'); // End color
+
+      // Assign gradient to dataset's backgroundColor
+      chart.data.datasets[0].backgroundColor = gradient;
+
+      chart.update();
+
     }
   };
 
@@ -111,7 +126,7 @@ const CallGraph = () => {
   };
 
   return (
-    <div>
+    <div className='calls-table'>
       <h2>Number of Calls Over Time</h2>
       <div>
         <label>
