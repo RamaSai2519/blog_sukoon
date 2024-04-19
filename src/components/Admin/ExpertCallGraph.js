@@ -60,12 +60,12 @@ const ExpertGraph = () => {
 
         callData.forEach(call => {
             const expertId = call.expert; // Assuming call.expert contains the expert ID
-            const expert = expertData.find(expert => expert._id === expertId);
+            const expert = expertData[expertId];
             if (expert) {
                 const expertName = expert.name;
                 expertCalls[expertName] = (expertCalls[expertName] || 0) + 1;
             }
-        });
+        });        
 
 
         const labels = Object.keys(expertCalls);
