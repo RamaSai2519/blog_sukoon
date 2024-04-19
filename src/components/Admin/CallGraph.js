@@ -91,7 +91,7 @@ const CallGraph = () => {
             data: counts,
             borderColor: gradient,
             borderWidth: 5,
-            pointRadius: 3,
+            pointRadius: 1,
             pointBorderWidth: 0,
             pointBackgroundColor: 'rgba(69, 120, 249, 1)',
             tension: 0.4
