@@ -17,7 +17,7 @@ const OnlineSaarthisTable = ({ onlineSaarthis }) => {
           {onlineSaarthis.map(saarthi => (
             <tr key={saarthi._id}>
               <td>{saarthi.name}</td>
-              <td>{saarthi.status}</td>
+              <td>{saarthi.isBusy}</td>
               {/* Add more columns as needed */}
             </tr>
           ))}
