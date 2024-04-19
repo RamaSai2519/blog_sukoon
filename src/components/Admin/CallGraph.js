@@ -5,7 +5,7 @@ import 'chartjs-adapter-luxon';
 
 const CallGraph = () => {
   const [chart, setChart] = useState(null);
-  const [timeframe, setTimeframe] = useState('week'); // Default timeframe is day
+  const [timeframe, setTimeframe] = useState('year'); // Default timeframe is year
 
   useEffect(() => {
     const fetchData = async () => {
@@ -50,8 +50,9 @@ const CallGraph = () => {
       case 'week':
         startDate.setDate(startDate.getDate() - 7);
         break;
-      default:
+      case 'year':
         startDate.setFullYear(startDate.getFullYear() - 1);
+        break;
     }
 
     const filteredData = callData.filter(call => new Date(call.initiatedTime) > startDate);
@@ -89,10 +90,7 @@ const CallGraph = () => {
         options: {
           scales: {
             x: {
-              title: {
-                display: true,
-                text: 'Date',
-              },
+              display: false, // Hide x-axis labels
             },
             y: {
               title: {
@@ -105,6 +103,20 @@ const CallGraph = () => {
             legend: {
               display: false, // Hide legend
             },
+            tooltip: {
+              callbacks: {
+                label: (context) => {
+                  const label = context.dataset.label || '';
+                  if (context.parsed.y !== null) {
+                    label += ': ' + context.parsed.y;
+                  }
+                  if (context.parsed.x !== null) {
+                    label += ' (' + new Date(context.parsed.x).toDateString() + ')';
+                  }
+                  return label;
+                }
+              }
+            }
           },
         },
       }));
@@ -117,7 +129,6 @@ const CallGraph = () => {
       chart.data.datasets[0].backgroundColor = gradient;
 
       chart.update();
-
     }
   };
 
@@ -126,7 +137,7 @@ const CallGraph = () => {
   };
 
   return (
-    <div className='calls-table'>
+    <div className='calls-table' style={{ height: 'auto', width: '100%' }}>
       <h2>Number of Calls Over Time</h2>
       <div>
         <label>
