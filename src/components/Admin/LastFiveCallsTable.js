@@ -43,21 +43,30 @@ const LastFiveCallsTable = () => {
   };
 
   // Function to render table rows with resolved user and expert names
-  const renderTableRows = () => {
-    return lastFiveCalls.map(async (call) => {
-      const userName = await fetchUserName(call.user);
-      const expertName = await fetchExpertName(call.expert);
-      return (
-        <tr key={call._id}>
-          <td>{userName}</td>
-          <td>{expertName}</td>
-          <td>{new Date(call.initiatedTime).toLocaleString()}</td>
-          <td>{call.duration} min</td>
-          <td>{call.status}</td>
-        </tr>
+  const renderTableRows = async () => {
+    try {
+      const rows = await Promise.all(
+        lastFiveCalls.map(async (call) => {
+          const userName = await fetchUserName(call.user);
+          const expertName = await fetchExpertName(call.expert);
+          return (
+            <tr key={call._id}>
+              <td>{userName}</td>
+              <td>{expertName}</td>
+              <td>{new Date(call.initiatedTime).toLocaleString()}</td>
+              <td>{call.duration} min</td>
+              <td>{call.status}</td>
+            </tr>
+          );
+        })
       );
-    });
+      return rows;
+    } catch (error) {
+      console.error('Error rendering table rows:', error);
+      return [];
+    }
   };
+  
 
   return (
     <div>
