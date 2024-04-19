@@ -53,6 +53,9 @@ const CallGraph = () => {
       case 'year':
         startDate.setFullYear(startDate.getFullYear() - 1);
         break;
+      default:
+        startDate.setFullYear(startDate.getFullYear() - 1);
+        break;
     }
 
     const filteredData = callData.filter(call => new Date(call.initiatedTime) > startDate);
@@ -86,12 +89,8 @@ const CallGraph = () => {
           labels: labels,
           datasets: [{
             data: counts,
-            borderColor: 'rgba(54, 162, 235, 1)', // Line color
+            borderColor: gradient, // Line color
             tension: 0.4,
-            fill: {
-              target: 'origin', // Fill from origin (bottom) to line
-              above: gradient // Use gradient color for fill above line
-            }
           }]
         },
         options: {
