@@ -79,9 +79,9 @@ const CallGraph = () => {
     }
 
     if (ctx) {
-      const gradient = ctx.getContext('2d').createLinearGradient(700, 0, 0, 0);
+      const gradient = ctx.getContext('2d').createLinearGradient(500, 0, 0, 0);
       gradient.addColorStop(0, 'rgba(69, 120, 249, 1)');
-      gradient.addColorStop(1, 'rgba(69, 120, 249, 0.2)');
+      gradient.addColorStop(1, 'rgba(69, 120, 249, 0)');
 
       setChart(new Chart(ctx, {
         type: 'line',
