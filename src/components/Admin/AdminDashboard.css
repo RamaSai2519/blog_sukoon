@@ -9,21 +9,30 @@
   .dashboard-tiles {
     display: flex;
     flex-wrap: wrap;
+    justify-content: space-between; /* Distribute tiles evenly */
   }
   
   .dashboard-tile {
-    flex: 1;
+    flex: 1 1 auto; /* Allow flex items to grow and shrink */
     margin: 10px;
     padding: 20px;
     background-color: #f0f0f0; /* Adjust background color as needed */
     border-radius: 5px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Add shadow for better visualization */
     min-width: 200px; /* Set minimum width for each tile */
+    width: calc(33.33% - 20px); /* Calculate width to fit three tiles in a row with margins */
+    box-sizing: border-box; /* Include padding and border in width calculation */
+  }
+  
+  @media screen and (max-width: 1024px) {
+    .dashboard-tile {
+      width: calc(50% - 20px); /* Set width to fit two tiles in a row with margins */
+    }
   }
   
   @media screen and (max-width: 768px) {
     .dashboard-tile {
-      flex-basis: 100%;
+      width: calc(100% - 20px); /* Set width to fit one tile in a row with margins */
     }
   }
   
