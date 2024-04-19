@@ -59,7 +59,7 @@ const ExpertGraph = () => {
     const expertCalls = {};
 
     callData.forEach(call => {
-        const expertId = call.expert.$oid;
+        const expertId = call.expert._id;
         const expertInfo = expertData[expertId];
         if (expertInfo) {
           const expertName = expertInfo.name;
