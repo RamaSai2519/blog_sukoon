@@ -9,51 +9,28 @@ const ExpertGraph = () => {
 
     useEffect(() => {
         const fetchData = async () => {
-            try {
-                const callData = await fetchCallData();
-                setCallData(callData);
-
-                const expertData = await fetchExpertData();
-                setExpertData(expertData);
-            } catch (error) {
-                console.error('Error fetching data:', error);
-            }
+          try {
+            const [callDataResponse, expertDataResponse] = await Promise.all([
+              fetchCallData(),
+              fetchExpertData()
+            ]);
+            
+            setCallData(callDataResponse);
+            setExpertData(expertDataResponse);
+          } catch (error) {
+            console.error('Error fetching data:', error);
+          }
         };
-
+      
         fetchData();
-    }, []);
-
-    const fetchCallData = async () => {
-        try {
-            const response = await fetch('/api/calls');
-            if (!response.ok) {
-                throw new Error('Failed to fetch call data');
-            }
-            const callData = await response.json();
-            return callData;
-        } catch (error) {
-            console.error('Error fetching call data:', error);
-            return [];
+      }, []);
+      
+      useEffect(() => {
+        if (callData.length > 0 && Object.keys(expertData).length > 0) {
+          renderChart(callData, expertData);
         }
-    };
-
-    const fetchExpertData = async () => {
-        try {
-            const response = await fetch('/api/experts');
-            if (!response.ok) {
-                throw new Error('Failed to fetch expert data');
-            }
-            const expertData = await response.json();
-            return expertData;
-        } catch (error) {
-            console.error('Error fetching expert data:', error);
-            return [];
-        }
-    };
-
-    useEffect(() => {
-        renderChart(callData, expertData);
-    }, [callData, expertData]);
+      }, [callData, expertData]);
+      
 
     const renderChart = (callData, expertData) => {
         const expertCalls = {};
