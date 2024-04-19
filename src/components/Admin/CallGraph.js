@@ -79,7 +79,7 @@ const CallGraph = () => {
     }
 
     if (ctx) {
-      const gradient = ctx.getContext('2d').createLinearGradient(0, 0, 0, 400);
+      const gradient = ctx.getContext('3d').createLinearGradient(0, 0, 0, 400);
       gradient.addColorStop(0, 'rgba(54, 162, 235, 1)'); // Start color
       gradient.addColorStop(1, 'rgba(54, 162, 235, 0)'); // End color
 
