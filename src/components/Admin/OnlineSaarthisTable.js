@@ -10,7 +10,6 @@ const OnlineSaarthisTable = ({ onlineSaarthis }) => {
           <tr>
             <th>Name</th>
             <th>Busy</th>
-            {/* Add more columns as needed */}
           </tr>
         </thead>
         <tbody>
