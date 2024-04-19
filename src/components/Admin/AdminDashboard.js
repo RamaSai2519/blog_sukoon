@@ -1,4 +1,6 @@
+// AdminDashboard.js
 import React, { useEffect, useState } from 'react';
+import axios from 'axios';
 import CallGraph from './CallGraph';
 import ExpertGraph from './ExpertGraph';
 
@@ -16,24 +18,24 @@ const AdminDashboard = () => {
   const fetchData = async () => {
     try {
       // Fetch calls data
-      const callsResponse = await fetch('/api/calls');
-      const { total_calls, successful_calls } = await callsResponse.json();
+      const callsResponse = await axios.get('/api/calls');
+      const { total_calls, successful_calls } = callsResponse.data;
       setTotalCalls(total_calls);
       setSuccessfulCalls(successful_calls);
 
       // Fetch users data
-      const usersResponse = await fetch('/api/users');
-      const { users } = await usersResponse.json();
+      const usersResponse = await axios.get('/api/users');
+      const { users } = usersResponse.data;
       setTotalUsers(users.length);
 
       // Fetch experts data
-      const expertsResponse = await fetch('/api/experts');
-      const { total_online_saarthis, online_saarthis } = await expertsResponse.json();
+      const expertsResponse = await axios.get('/api/experts');
+      const { total_online_saarthis, online_saarthis } = expertsResponse.data;
       setOnlineSaarthis(total_online_saarthis);
 
       // Fetch latest calls data
-      const latestCallsResponse = await fetch('/api/latest_calls');
-      const { latest_calls } = await latestCallsResponse.json();
+      const latestCallsResponse = await axios.get('/api/latest_calls');
+      const { latest_calls } = latestCallsResponse.data;
       setLatestCalls(latest_calls);
     } catch (error) {
       console.error('Error fetching data:', error);
