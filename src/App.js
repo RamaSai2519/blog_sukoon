@@ -59,7 +59,7 @@ const App = () => {
                 <Route path="*" element={<Navigate to="/calls/dashboard" />} />
               </>
             ) : (
-              <Route path="/calls*" element={<Navigate to="/admin" />} />
+              <Route path="/calls/*" element={<Navigate to="/admin" />} />
             )}
           </Routes>
         </Suspense>

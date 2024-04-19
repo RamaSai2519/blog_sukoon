@@ -11,9 +11,8 @@ const Header = ({ isLoggedIn, onLogout }) => {
         <meta name="description" content="Discover engaging narratives, diverse languages, and the essence of heartfelt conversations in senior living on the sukoon.love blog. Embrace the wisdom of elders and nurture authentic connections through our enriching content." />
       </Helmet>
       <div className="logo">
-        {/* Logo */}
-        <Link to="/">
-          <img src={require('../assets/logo.svg')} alt="Sukoon Logo" className='logo_svg' />
+        <Link to="https://sukoon.love">
+          <img src={require('../assets/logo.png')} alt="Sukoon Logo" className='logo_svg' />
         </Link>
       </div>
       <div className='nav-buttons'>
