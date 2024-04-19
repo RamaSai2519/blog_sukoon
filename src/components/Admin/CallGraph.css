@@ -1,11 +1,11 @@
 .drop-down select {
     border: none;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    /* Adjust the shadow as needed */
-    font-size: 1.2em;
-    /* Adjust the font size as needed */
-    padding: 8px 12px;
-    /* Adjust padding as needed */
+    font-family: 'Custom Font';
+    font-size: 1.5em;
+    font-weight: bold;
     outline: none;
-    /* Remove the default outline */
+    margin-block-start: 18px;
+    margin-block-end: 0;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
 }
