@@ -5,7 +5,7 @@ import CallGraph from './CallGraph';
 import ExpertGraph from './ExpertGraph';
 import OnlineSaarthisTable from './OnlineSaarthisTable';
 import LastFiveCallsTable from './LastFiveCallsTable';
-import './AdminDashboard.css'; // Import CSS file
+// import './AdminDashboard.css';
 
 const AdminDashboard = () => {
   const [totalCalls, setTotalCalls] = useState([]);
