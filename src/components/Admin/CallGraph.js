@@ -80,7 +80,7 @@ const CallGraph = () => {
 
     if (ctx) {
       const gradient = ctx.getContext('2d').createLinearGradient(1000, 0, 0, 0);
-      gradient.addColorStop(0, 'rgba(54, 162, 235, 0.8)');
+      gradient.addColorStop(0, 'rgba(54, 162, 235, 1)');
       gradient.addColorStop(1, 'rgba(54, 162, 235, 0.2)');
 
       setChart(new Chart(ctx, {
