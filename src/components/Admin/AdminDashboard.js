@@ -5,6 +5,7 @@ import CallGraph from './CallGraph';
 import ExpertGraph from './ExpertGraph';
 import OnlineSaarthisTable from './OnlineSaarthisTable';
 import LastFiveCallsTable from './LastFiveCallsTable';
+import './AdminDashboard.css'; // Import CSS file
 
 const AdminDashboard = () => {
   const [totalCalls, setTotalCalls] = useState([]);
@@ -38,23 +39,36 @@ const AdminDashboard = () => {
   };
 
   const calculateTotalUsers = (callsData) => {
-    // Calculate the total number of unique users from all calls
     const uniqueUsers = new Set(callsData.map(call => call.user));
     return uniqueUsers.size;
   };
 
   return (
-    <div>
+    <div className="admin-dashboard-container">
       <h2>Admin Dashboard</h2>
-      <div>
-        <p>Total Calls: {totalCalls.length}</p>
-        <p>Total Successful Calls: {successfulCalls.length}</p>
-        <p>Total Users: {totalUsers}</p>
-        <OnlineSaarthisTable onlineSaarthis={onlineSaarthis} />
+      <div className="dashboard-tiles">
+        <div className="dashboard-tile">
+          <p>Total Calls: {totalCalls.length}</p>
+        </div>
+        <div className="dashboard-tile">
+          <p>Total Successful Calls: {successfulCalls.length}</p>
+        </div>
+        <div className="dashboard-tile">
+          <p>Total Users: {totalUsers}</p>
+        </div>
+        <div className="dashboard-tile">
+          <OnlineSaarthisTable onlineSaarthis={onlineSaarthis} />
+        </div>
+        <div className="dashboard-tile">
+          <LastFiveCallsTable />
+        </div>
+        <div className="dashboard-tile">
+          <CallGraph />
+        </div>
+        <div className="dashboard-tile">
+          <ExpertGraph />
+        </div>
       </div>
-      <LastFiveCallsTable />
-      <CallGraph />
-      <ExpertGraph />
     </div>
   );
 };
