@@ -76,6 +76,10 @@ const CallGraph = () => {
     }
 
     if (ctx) {
+      const gradient = ctx.getContext('2d').createLinearGradient(0, 0, 0, 400);
+      gradient.addColorStop(0, 'rgba(54, 162, 235, 1)'); // Start color
+      gradient.addColorStop(1, 'rgba(54, 162, 235, 0)'); // End color
+
       setChart(new Chart(ctx, {
         type: 'line',
         data: {
@@ -83,8 +87,11 @@ const CallGraph = () => {
           datasets: [{
             data: counts,
             borderColor: 'rgba(54, 162, 235, 1)', // Line color
-            color: ctx.getContext('2d').createLinearGradient(0, 0, 0, 400),
             tension: 0.4,
+            fill: {
+              target: 'origin', // Fill from origin (bottom) to line
+              above: gradient // Use gradient color for fill above line
+            }
           }]
         },
         options: {
@@ -113,13 +120,6 @@ const CallGraph = () => {
           },
         },
       }));
-
-      const gradient = ctx.getContext('2d').createLinearGradient(0, 0, 0, 400);
-      gradient.addColorStop(0, 'rgba(54, 162, 235, 1)'); // Start color
-      gradient.addColorStop(1, 'rgba(54, 162, 235, 0)'); // End color
-
-      // Assign gradient to dataset's backgroundColor
-      chart.data.color = gradient;
 
       chart.update();
     }
