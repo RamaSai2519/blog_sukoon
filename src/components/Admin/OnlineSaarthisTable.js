@@ -17,7 +17,6 @@ const OnlineSaarthisTable = ({ onlineSaarthis }) => {
             <tr key={saarthi._id}>
               <td>{saarthi.name}</td>
               <td>{saarthi.isBusy ? 'Yes' : 'No'}</td>
-              {/* Add more columns as needed */}
             </tr>
           ))}
         </tbody>
