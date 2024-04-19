@@ -147,7 +147,7 @@ const CallGraph = () => {
           </label>
         </div>
       </div>
-      <div className='call-chart' style={{ height: '100%', width: '100%' }}>
+      <div className='call-chart'>
         <canvas id="callChart"></canvas>
       </div>
     </div>
