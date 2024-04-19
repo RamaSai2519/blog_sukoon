@@ -1,4 +1,3 @@
-// src/components/Admin/LastFiveCallsTable.js
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
@@ -43,6 +42,23 @@ const LastFiveCallsTable = () => {
     }
   };
 
+  // Function to render table rows with resolved user and expert names
+  const renderTableRows = () => {
+    return lastFiveCalls.map(async (call) => {
+      const userName = await fetchUserName(call.user);
+      const expertName = await fetchExpertName(call.expert);
+      return (
+        <tr key={call._id}>
+          <td>{userName}</td>
+          <td>{expertName}</td>
+          <td>{new Date(call.initiatedTime).toLocaleString()}</td>
+          <td>{call.duration} min</td>
+          <td>{call.status}</td>
+        </tr>
+      );
+    });
+  };
+
   return (
     <div>
       <p>Last Five Calls:</p>
@@ -56,17 +72,7 @@ const LastFiveCallsTable = () => {
             <th>Status</th>
           </tr>
         </thead>
-        <tbody>
-          {lastFiveCalls.map(call => (
-            <tr key={call._id}>
-              <td>{fetchUserName(call.user)}</td>
-              <td>{fetchExpertName(call.expert)}</td>
-              <td>{new Date(call.initiatedTime).toLocaleString()}</td>
-              <td>{call.duration} min</td>
-              <td>{call.status}</td>
-            </tr>
-          ))}
-        </tbody>
+        <tbody>{renderTableRows()}</tbody>
       </table>
     </div>
   );
