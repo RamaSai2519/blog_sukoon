@@ -110,15 +110,6 @@ const CallGraph = () => {
             legend: {
               display: false, // Hide legend
             },
-            tooltip: {
-              callbacks: {
-                label: (context) => `Number of Calls: ${context.parsed.y}`,
-                title: (context) => `Date: ${context[0].parsed.x}`,
-                afterLabel: (context) => `Number of Calls: ${context.parsed.y}`,
-                afterTitle: (context) => `Date: ${context[0].parsed.x}`,
-                afterBody: (context) => `Number of Calls: ${context[0].parsed.y}`,
-              },
-            },
           },
         },
       }));
