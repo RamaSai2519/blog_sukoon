@@ -89,8 +89,8 @@ const CallGraph = () => {
           labels: labels,
           datasets: [{
             data: counts,
-            borderColor: gradient, // Line color
-            tension: 0.4,
+            borderColor: gradient,
+            tension: 0.4
           }]
         },
         options: {
