@@ -1,4 +1,4 @@
-// src/components/Admin/OnlineSaarthisTable.js
+// OnlineSaarthisTable.js
 import React from 'react';
 
 const OnlineSaarthisTable = ({ onlineSaarthis }) => {
