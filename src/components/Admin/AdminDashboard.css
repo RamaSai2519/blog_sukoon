@@ -22,6 +22,11 @@
     min-width: 200px; /* Set minimum width for each tile */
     width: calc(33.33% - 20px); /* Calculate width to fit three tiles in a row with margins */
     box-sizing: border-box; /* Include padding and border in width calculation */
+    overflow: hidden; /* Prevent content overflow */
+  }
+  
+  .dashboard-tile-content {
+    overflow: hidden; /* Prevent content overflow */
   }
   
   @media screen and (max-width: 1024px) {

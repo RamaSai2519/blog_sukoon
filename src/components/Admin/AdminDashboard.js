@@ -48,29 +48,45 @@ const AdminDashboard = () => {
       <h2>Admin Dashboard</h2>
       <div className="dashboard-tiles">
         <div className="dashboard-tile">
-          <p>Total Calls: {totalCalls.length}</p>
+          <div className="dashboard-tile-content">
+            <p>Total Calls: {totalCalls.length}</p>
+          </div>
         </div>
         <div className="dashboard-tile">
-          <p>Total Successful Calls: {successfulCalls.length}</p>
+          <div className="dashboard-tile-content">
+            <p>Total Successful Calls: {successfulCalls.length}</p>
+          </div>
         </div>
         <div className="dashboard-tile">
-          <p>Total Users: {totalUsers}</p>
+          <div className="dashboard-tile-content">
+            <p>Total Users: {totalUsers}</p>
+          </div>
         </div>
         <div className="dashboard-tile">
-          <OnlineSaarthisTable onlineSaarthis={onlineSaarthis} />
+          <div className="dashboard-tile-content">
+            <OnlineSaarthisTable onlineSaarthis={onlineSaarthis} />
+          </div>
         </div>
         <div className="dashboard-tile">
-          <LastFiveCallsTable />
+          <div className="dashboard-tile-content">
+            <LastFiveCallsTable />
+          </div>
         </div>
         <div className="dashboard-tile">
-          <CallGraph />
+          <div className="dashboard-tile-content">
+            <CallGraph />
+          </div>
         </div>
         <div className="dashboard-tile">
-          <ExpertGraph />
+          <div className="dashboard-tile-content">
+            <ExpertGraph />
+          </div>
         </div>
       </div>
     </div>
   );
+
+
 };
 
 export default AdminDashboard;
