@@ -2,6 +2,7 @@
 import React, { useEffect, useState } from 'react';
 import Chart from 'chart.js/auto';
 import 'chartjs-adapter-luxon';
+import './CallGraph.css';
 
 const CallGraph = () => {
   const [chart, setChart] = useState(null);
