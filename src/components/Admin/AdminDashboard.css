@@ -1,43 +1,45 @@
 /* AdminDashboard.css */
 
 .admin-dashboard-container {
-    max-width: 1200px; /* Adjust max-width according to your preference */
+    max-width: 1200px;
+    /* Adjust max-width according to your preference */
     margin: 0 auto;
     padding: 20px;
-  }
-  
-  .dashboard-tiles {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between; /* Distribute tiles evenly */
-  }
-  
-  .dashboard-tile {
-    flex: 1 1 auto; /* Allow flex items to grow and shrink */
+}
+
+
+.grid-row {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    max-width: 400px;
+}
+
+.grid-tile-1 {
+    flex: 1 1 auto;
     margin: 10px;
     padding: 20px;
-    background-color: #f0f0f0; /* Adjust background color as needed */
+    background-color: #fff;
     border-radius: 5px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Add shadow for better visualization */
-    min-width: 200px; /* Set minimum width for each tile */
-    width: calc(33.33% - 20px); /* Calculate width to fit three tiles in a row with margins */
-    box-sizing: border-box; /* Include padding and border in width calculation */
-    overflow: hidden; /* Prevent content overflow */
-  }
-  
-  .dashboard-tile-content {
-    overflow: hidden; /* Prevent content overflow */
-  }
-  
-  @media screen and (max-width: 1024px) {
-    .dashboard-tile {
-      width: calc(50% - 20px); /* Set width to fit two tiles in a row with margins */
-    }
-  }
-  
-  @media screen and (max-width: 768px) {
-    .dashboard-tile {
-      width: calc(100% - 20px); /* Set width to fit one tile in a row with margins */
-    }
-  }
-  
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.grid-tile-1 h3 {
+    font-size: 24px; /* Adjust the font size according to your preference */
+}
+
+.dashboard-tiles {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    /* Distribute tiles evenly */
+}
+
+.dashboard-tile {
+    flex: 1 1 auto;
+    margin: 10px;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 5px;
+    width: fit-content;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}

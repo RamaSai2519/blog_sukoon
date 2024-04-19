@@ -47,46 +47,37 @@ const AdminDashboard = () => {
     <div className="admin-dashboard-container">
       <h2>Admin Dashboard</h2>
       <div className="dashboard-tiles">
-        <div className="dashboard-tile">
-          <div className="dashboard-tile-content">
-            <p>Total Calls: {totalCalls.length}</p>
+        <div className="insight-tiles">
+          <div className="grid-row">
+            <div className="grid-tile-1">
+              <h2>Total Calls</h2>
+              <h3>{totalCalls.length}</h3>
+            </div>
+            <div className="grid-tile-1">
+              <h2>Total Users</h2>
+              <h3>{totalUsers}</h3>
+            </div>
+            <div className="grid-tile-1">
+              <h2>Successful Calls</h2>
+              <h3>{successfulCalls.length}</h3>
+            </div>
           </div>
         </div>
         <div className="dashboard-tile">
-          <div className="dashboard-tile-content">
-            <p>Total Successful Calls: {successfulCalls.length}</p>
-          </div>
+          <CallGraph />
         </div>
         <div className="dashboard-tile">
-          <div className="dashboard-tile-content">
-            <p>Total Users: {totalUsers}</p>
-          </div>
+          <OnlineSaarthisTable onlineSaarthis={onlineSaarthis} />
         </div>
         <div className="dashboard-tile">
-          <div className="dashboard-tile-content">
-            <OnlineSaarthisTable onlineSaarthis={onlineSaarthis} />
-          </div>
+          <LastFiveCallsTable />
         </div>
         <div className="dashboard-tile">
-          <div className="dashboard-tile-content">
-            <LastFiveCallsTable />
-          </div>
-        </div>
-        <div className="dashboard-tile">
-          <div className="dashboard-tile-content">
-            <CallGraph />
-          </div>
-        </div>
-        <div className="dashboard-tile">
-          <div className="dashboard-tile-content">
-            <ExpertGraph />
-          </div>
+          <ExpertGraph />
         </div>
       </div>
     </div>
   );
-
-
 };
 
 export default AdminDashboard;
