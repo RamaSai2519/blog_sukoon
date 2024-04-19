@@ -4,7 +4,7 @@ import axios from 'axios';
 import CallGraph from './CallGraph';
 import ExpertGraph from './ExpertGraph';
 import OnlineSaarthisTable from './OnlineSaarthisTable';
-import LastFiveCallsTable from './LastFiveCallsTable';
+// import LastFiveCallsTable from './LastFiveCallsTable';
 
 const AdminDashboard = () => {
   const [totalCalls, setTotalCalls] = useState([]);
@@ -52,7 +52,7 @@ const AdminDashboard = () => {
         <p>Total Users: {totalUsers}</p>
         <OnlineSaarthisTable onlineSaarthis={onlineSaarthis} />
       </div>
-      <LastFiveCallsTable />
+      {/* <LastFiveCallsTable /> */}
       <CallGraph />
       <ExpertGraph />
     </div>
