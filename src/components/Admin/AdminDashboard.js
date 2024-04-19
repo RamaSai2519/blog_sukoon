@@ -1,4 +1,6 @@
+// AdminDashboard.js
 import React, { useEffect, useState } from 'react';
+import axios from 'axios';
 import CallGraph from './CallGraph';
 import ExpertGraph from './ExpertGraph';
 
@@ -13,32 +15,33 @@ const AdminDashboard = () => {
     fetchData();
   }, []);
 
+  useEffect(() => {
+    fetchData();
+  }, []);
+  
   const fetchData = async () => {
     try {
-      // Fetch calls data
-      const callsResponse = await fetch('/api/calls');
-      const { total_calls, successful_calls } = await callsResponse.json();
-      setTotalCalls(total_calls);
-      setSuccessfulCalls(successful_calls);
-
-      // Fetch users data
-      const usersResponse = await fetch('/api/users');
-      const { users } = await usersResponse.json();
-      setTotalUsers(users.length);
-
-      // Fetch experts data
-      const expertsResponse = await fetch('/api/experts');
-      const { total_online_saarthis, online_saarthis } = await expertsResponse.json();
-      setOnlineSaarthis(total_online_saarthis);
-
-      // Fetch latest calls data
-      const latestCallsResponse = await fetch('/api/latest_calls');
-      const { latest_calls } = await latestCallsResponse.json();
-      setLatestCalls(latest_calls);
+      const callsResponse = await axios.get('/api/calls');
+      const usersResponse = await axios.get('/api/users');
+      const expertsResponse = await axios.get('/api/experts');
+      const latestCallsResponse = await axios.get('/api/latest_calls');
+  
+      // Check if any of the responses are empty
+      if (!callsResponse.data || !usersResponse.data || !expertsResponse.data || !latestCallsResponse.data) {
+        throw new Error('Empty response received');
+      }
+  
+      // Set state with the fetched data
+      setTotalCalls(callsResponse.data.total_calls);
+      setSuccessfulCalls(callsResponse.data.successful_calls);
+      setTotalUsers(usersResponse.data.users.length);
+      setOnlineSaarthis(expertsResponse.data.total_online_saarthis);
+      setLatestCalls(latestCallsResponse.data.latest_calls);
     } catch (error) {
       console.error('Error fetching data:', error);
     }
   };
+  
 
   return (
     <div>
