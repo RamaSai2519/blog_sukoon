@@ -138,7 +138,7 @@ const CallGraph = () => {
           </select>
         </label>
       </div>
-      <div style={{ height: '400px', width: '600px' }}>
+      <div className='call-chart' style={{ height: '100%', width: '100%' }}>
         <canvas id="callChart"></canvas>
       </div>
     </div>
