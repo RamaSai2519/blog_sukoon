@@ -42,7 +42,6 @@ const LastFiveCallsTable = () => {
     }
   };
 
-  // Function to render table rows with resolved user and expert names
   const renderTableRows = async () => {
     try {
       const rows = await Promise.all(
@@ -66,7 +65,6 @@ const LastFiveCallsTable = () => {
       return [];
     }
   };
-  
 
   return (
     <div>
