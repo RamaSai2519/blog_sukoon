@@ -83,7 +83,7 @@ const CallGraph = () => {
           datasets: [{
             data: counts,
             borderColor: 'rgba(54, 162, 235, 1)', // Line color
-            backgroundColor: ctx.getContext('2d').createLinearGradient(0, 0, 0, 400),
+            color: ctx.getContext('2d').createLinearGradient(0, 0, 0, 400),
             tension: 0.4,
           }]
         },
@@ -119,7 +119,7 @@ const CallGraph = () => {
       gradient.addColorStop(1, 'rgba(54, 162, 235, 0)'); // End color
 
       // Assign gradient to dataset's backgroundColor
-      chart.data.datasets[0].backgroundColor = gradient;
+      chart.data.datasets[0].color = gradient;
 
       chart.update();
     }
