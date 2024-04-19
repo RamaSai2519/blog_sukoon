@@ -71,9 +71,6 @@ const AdminDashboard = () => {
           <CallGraph />
         </div>
         <div className="dashboard-tile">
-          
-        </div>
-        <div className="dashboard-tile">
           <LastFiveCallsTable />
         </div>
         <div className="dashboard-tile">
