@@ -47,11 +47,11 @@ const CallGraph = () => {
       case 'month':
         startDate.setMonth(startDate.getMonth() - 1);
         break;
-      case 'year':
-        startDate.setFullYear(startDate.getFullYear() - 1);
+      case 'week':
+        startDate.setDate(startDate.getDate() - 7);
         break;
       default:
-        startDate.setDate(startDate.getDate() - 7);
+        startDate.setFullYear(startDate.getFullYear() - 1);
     }
 
     const filteredData = callData.filter(call => new Date(call.initiatedTime) > startDate);
