@@ -61,7 +61,7 @@ const ExpertGraph = () => {
     callData.forEach(call => {
         const expertId = call.expert._id;
         const expertInfo = expertData[expertId];
-        const expertName = expertInfo.name;
+        const expertName = expertData.name;
         expertCalls[expertName] = (expertCalls[expertName] || 0) + 1;
       });
       
