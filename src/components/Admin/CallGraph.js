@@ -119,7 +119,7 @@ const CallGraph = () => {
       gradient.addColorStop(1, 'rgba(54, 162, 235, 0)'); // End color
 
       // Assign gradient to dataset's backgroundColor
-      chart.data.datasets[0].color = gradient;
+      chart.data.color = gradient;
 
       chart.update();
     }
