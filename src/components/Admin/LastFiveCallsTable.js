@@ -23,6 +23,26 @@ const LastFiveCallsTable = () => {
     }
   };
 
+  const fetchUserName = async (userId) => {
+    try {
+      const response = await axios.get(`/api/users/${userId}`);
+      return response.data.name;
+    } catch (error) {
+      console.error('Error fetching user:', error);
+      return 'Unknown';
+    }
+  };
+
+  const fetchExpertName = async (expertId) => {
+    try {
+      const response = await axios.get(`/api/experts/${expertId}`);
+      return response.data.name;
+    } catch (error) {
+      console.error('Error fetching expert:', error);
+      return 'Unknown';
+    }
+  };
+
   return (
     <div>
       <p>Last Five Calls:</p>
@@ -39,8 +59,8 @@ const LastFiveCallsTable = () => {
         <tbody>
           {lastFiveCalls.map(call => (
             <tr key={call._id}>
-              <td>{call.user}</td>
-              <td>{call.expert}</td>
+              <td>{fetchUserName(call.user)}</td>
+              <td>{fetchExpertName(call.expert)}</td>
               <td>{new Date(call.initiatedTime).toLocaleString()}</td>
               <td>{call.duration} min</td>
               <td>{call.status}</td>
