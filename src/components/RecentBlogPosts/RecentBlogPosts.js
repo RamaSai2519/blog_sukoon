@@ -10,7 +10,7 @@ const RecentBlogPosts = () => {
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    axios.get('/api/blogs')
+    axios.get('https://adminapi.sukoon.love/api/blogs')
       .then(response => {
         setBlogs(response.data);
         setLoading(false);

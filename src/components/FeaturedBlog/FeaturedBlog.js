@@ -11,7 +11,7 @@ const FeaturedBlog = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    axios.get('/api/featuredblog')
+    axios.get('https://adminapi.sukoon.love/api/featuredblog')
       .then(response => {
         setFeaturedBlog(response.data);
         setLoading(false); // Set loading to false after data is fetched

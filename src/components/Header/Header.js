@@ -24,20 +24,6 @@ const Header = ({ isLoggedIn, onLogout }) => {
                 <span>Blog</span>
               </Link>
             </li>
-            {/* Conditional rendering of login/logout button */}
-            {isLoggedIn ? (
-              <li key="logout">
-                <button className='outlined-button' onClick={onLogout} aria-label="Log out">
-                  <span>Log Out</span>
-                </button>
-              </li>
-            ) : (
-              <li key="login">
-                <Link to="/admin" className='outlined-button' aria-label="Navigate to the Admin Login">
-                  <span>Log In</span>
-                </Link>
-              </li>
-            )}
           </ul>
         </nav>
       </div>
