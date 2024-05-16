@@ -9,7 +9,6 @@ import App from './App';
 
 ReactGA.initialize('G-X1P4R644F2');
 
-
 ReactDOM.render(
   <Router>
     <Helmet>
